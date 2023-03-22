@@ -36,30 +36,28 @@ const addImages = (product) => ({
 })
 // Thunks
 
-export const createCampsiteThunk = (product) => async (dispatch) => {
-    // console.log("THUNK", product)
-    // console.log("imgData", product.imgData)
-    const response = await fetch(`/api/products/`, {
+export const createCampsiteThunk = (campsite) => async (dispatch) => {
+    const response = await fetch(`/api/campsites/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(product.ProductData)
+        body: JSON.stringify()
     })
     let ProductData;
     if(response.ok){
         ProductData = await response.json()
         // const productData = await response.json()
         // console.log("PRODUCTDATA", productData)
-        const res = await fetch(`/api/productImages/`, {
+        const res = await fetch(`/api/campsiteImages/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                image: product.imgData.image,
-                previewImage: product.imgData.preview,
-                product_id: ProductData.id
+                // image: product.imgData.image,
+                // previewImage: product.imgData.preview,
+                // product_id: ProductData.id
             })
         })
 
