@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from app.models import Campsite, db, Review, CampsiteImage
-
+from app.models import Campsite, db
+from app.forms import CampsiteForm
 import datetime
 from flask_login import login_required, current_user
 
@@ -34,5 +34,64 @@ def singleCampsite(id):
 
     return {"campsite": cd}
 
-# @campsite_routes.route('/', methods=['POST'])
-# @login_required
+@campsite_routes.route('/', methods=['POST'])
+@login_required
+def createCampsite():
+    data = request.get_json()
+    form = CampsiteForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_campsite = Campsite(
+            name = data["name"],
+            ownersid = current_user.id,
+            details = data["details"],
+            location = data["location"],
+            landtype = data["landtype"],
+            cost = data["cost"],
+            roaddifficulty = data["roaddifficulty"],
+            cleanliness = data["cleanliness"],
+            celldata = data["celldata"],
+            accessibility = data["accessibility"],
+        )
+        db.session.add(new_campsite)
+        db.session.commit()
+
+        return new_campsite.to_dict()
+    else:
+        return form.errors
+
+@campsite_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def updateCampsite(id):
+    campsite = Campsite.query.get(id)
+    data = request.get_json()
+    if campsite:
+        campsite.name = data["name"]
+        campsite.details = data["details"]
+        campsite.location = data["location"]
+        campsite.landtype = data["landtype"]
+        campsite.cost = data["cost"]
+        campsite.roaddifficulty = data["roaddifficulty"]
+        campsite.cleanliness = data["cleanliness"]
+        campsite.celldata = data["celldata"]
+        campsite.accessibility = data["accessibility"]
+        campsite.ownerid = current_user.id
+        campsite.id = campsite.id
+
+        db.session.commit()
+        campsiteObj = campsite.to_dict()
+
+        return campsiteObj
+    else:
+        return {"error": "Campsite does not exist"}, 404
+
+@campsite_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def deleteCampsite(id):
+    campsite = Campsite.query.get(id)
+    if not campsite:
+        return ("Campsite not found"), 404
+    db.session.delete(campsite)
+    db.session.commit()
+
+    return {"Campsite successfully deleted": id}

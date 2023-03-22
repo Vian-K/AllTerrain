@@ -12,3 +12,4 @@ class CampsiteForm(FlaskForm):
     cleanliness = IntegerField("Cleanliness", validators=[DataRequired()])
     celldata = StringField("Cell Data", validators=[DataRequired()])
     accessibility = StringField("Accessibility", validators=[DataRequired()])
+    submit = SubmitField("Submit")
