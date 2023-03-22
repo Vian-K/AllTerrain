@@ -26,6 +26,7 @@ class Campsite(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'ownersid': self.ownersid,
             'name': self.name,
             'location': self.location,
             'cost': self.cost,
