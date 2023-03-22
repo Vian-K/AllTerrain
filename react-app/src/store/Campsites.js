@@ -42,11 +42,11 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify()
+        body: JSON.stringify(campsite)
     })
-    let ProductData;
+    let campsiteData;
     if(response.ok){
-        ProductData = await response.json()
+        campsiteData = await response.json()
         // const productData = await response.json()
         // console.log("PRODUCTDATA", productData)
         const res = await fetch(`/api/campsiteImages/`, {
@@ -55,18 +55,18 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // image: product.imgData.image,
-                // previewImage: product.imgData.preview,
-                // product_id: ProductData.id
+                image: campsite.imgData.image,
+                previewImage: campsite.imgData.preview,
+                campsite_id: campsiteData.id
             })
         })
 
         if(res.ok){
             const resData = await res.json()
-            ProductData.productImages = [resData]
+            campsiteData.campsiteImages = [resData]
             // console.log("PRODUCTDATA", ProductData)
 
-            dispatch(creatCampsite(ProductData))
+            dispatch(creatCampsite(campsiteData))
             return
         }
 
