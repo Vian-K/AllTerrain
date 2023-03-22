@@ -13,6 +13,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    # campsiteid = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('campsite.id')), nullable=False)
+
+    campsite = db.relationship("Campsite", back_populates="users")
+    reviews = db.relationship("Review", back_populates="users")
+    # myplaces = db.relationship("MyPlace", back_populates="users")
+    # checklist = db.relationship("Checklist", back_populates="users")
 
     @property
     def password(self):

@@ -1,9 +1,17 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
+import CampsiteReducer from './Campsites';
+import reviewsReducer from './Reviews';
+import checklistReducer from './checklist';
+import placesReducer from './myPlaces';
 
 const rootReducer = combineReducers({
   session,
+  CampsiteReducer,
+  reviewsReducer,
+  checklistReducer,
+  placesReducer
 });
 
 
