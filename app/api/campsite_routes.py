@@ -22,17 +22,22 @@ def allCampsites():
 @campsite_routes.route('/<int:id>')
 def singleCampsite(id):
     campsite = Campsite.query.get(id)
-    cd = campsite.to_dict()
-    owner = campsite.ownersid
-    campsiteimages = campsite.campsiteimages
-    cdImages = {'campsiteimages': [campsiteimages.to_dict() for campsiteimages in campsiteimages]}
-    cdReviews = {'reviews': [reviews.to_dict() for reviews in campsite.reviews]}
-    cdOwner = {'owner': owner}
-    cd.update(cdOwner)
-    cd.update(cdImages)
-    cd.update(cdReviews)
+    if not campsite:
+        return ("Campsite not found"), 404
+    else:
+        cd = campsite.to_dict()
+        owner = campsite.ownersid
+        campsiteimages = campsite.campsiteimages
+        cdImages = {'campsiteimages': [campsiteimages.to_dict() for campsiteimages in campsiteimages]}
+        cdReviews = {'reviews': [reviews.to_dict() for reviews in campsite.reviews]}
+        cdOwner = {'owner': owner}
+        cd.update(cdOwner)
+        cd.update(cdImages)
+        cd.update(cdReviews)
 
-    return {"campsite": cd}
+        return {"campsite": cd}
+
+
 
 @campsite_routes.route('/', methods=['POST'])
 @login_required
