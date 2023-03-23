@@ -74,14 +74,14 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
 }
 
 export const loadCampsiteThunk = () => async (dispatch) => {
-    const response = await fetch(`/api/products/`)
+    const response = await fetch(`/api/campsites/`)
     const data = await response.json()
     dispatch(loadCampsite(data))
     return response
 }
 
 export const singleCampsiteThunk = (id) => async (dispatch) => {
-    const response = await fetch(`/api/products/${id}`)
+    const response = await fetch(`/api/campsites/${id}`)
     const data = await response.json()
 
     dispatch(singleCampsite(data))
@@ -89,22 +89,21 @@ export const singleCampsiteThunk = (id) => async (dispatch) => {
 }
 
 
-export const editCampsiteThunk = (currentProductID, editedProduct, imgData) => async (dispatch) => {
-    // console.log('CURRENT PRODUCT ID', currentProductID)
-    // console.log("EDIT PRODUCT", editedProduct)
-    const response = await fetch(`/api/products/${currentProductID}`, {
+export const editCampsiteThunk = (campsiteID, editedCampsite, imgData) => async (dispatch) => {
+
+    const response = await fetch(`/api/campsites/${campsiteID}`, {
         method:'PUT',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(editedProduct)
+        body: JSON.stringify(editedCampsite)
     })
-    // console.log("RESOK", response)
+
     let data = await response.json()
     let data2;
-    // console.log("IMAGE DATA========", imgData)
+
     if (response.ok && imgData.img_url.length > 5 ) {
-        const response2 = await fetch(`/api/productImages/${currentProductID}`, {
+        const response2 = await fetch(`/api/campsiteImages/${campsiteID}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
@@ -116,9 +115,7 @@ export const editCampsiteThunk = (currentProductID, editedProduct, imgData) => a
 
     if (response.ok){
 
-        // console.log("DATA==================", data)
-        // console.log("DATA2===================", data2)
-        if(data2) data.productImages = [data2]
+        if(data2) data.campsiteImages = [data2]
         dispatch(editCampsite(data))
     }
     return data
@@ -126,8 +123,8 @@ export const editCampsiteThunk = (currentProductID, editedProduct, imgData) => a
 }
 
 export const deleteCampsiteThunk = (id) => async (dispatch) => {
-    // console.log("ID", id)
-    const response = await fetch(`/api/products/${id}`, {
+
+    const response = await fetch(`/api/campsites/${id}`, {
         method: 'DELETE'
     })
     if (response.ok) {
@@ -137,51 +134,50 @@ export const deleteCampsiteThunk = (id) => async (dispatch) => {
     }
 }
 
-const initialState = {allCampsite: {}, singleCampsite: {}}
+const initialState = {allCampsites: {}, singleCampsite: {}}
 
 export const CampsiteReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case LOAD_CAMPSITE:
             newState = {...state}
-            let allProductsCopy = {}
-            action.payload.products.forEach(product => {
-                allProductsCopy[product.id] = product
+            let allCampsitesCopy = {}
+            action.payload.campsites.forEach(product => {
+                allCampsitesCopy[product.id] = product
             })
-            newState.allProducts = allProductsCopy
-            // console.log("allproductscopy", allProductsCopy)
+            newState.allCampsites = allCampsitesCopy
             return newState
         case NEW_CAMPSITE:
             newState = {...state}
-            let newStateCopy = {...newState.allProducts}
+            let newStateCopy = {...newState.allCampsites}
             newStateCopy[action.payload.id] = action.payload
-            newState.allProducts = newStateCopy
+            newState.allCampsites = newStateCopy
             return newState
         case LOAD_ONE_CAMPSITE:
             newState = {...state}
             // console.log("Action", action)
-            newState.singleProduct = action.payload
+            newState.singleCampsite = action.payload
             return newState
         case EDIT_CAMPSITE:
             return {...state,
-                singleProduct: {
-                    ...state.singleProduct,
+                singleCampsite: {
+                    ...state.singleCampsite,
                     ...action.payload
                 }
             }
         case DELETE_CAMPSITE:
             newState={...state}
-            let productsCopy = {...newState.allProducts}
-            delete productsCopy[action.id]
-            newState.allProducts = productsCopy
+            let campsitesCopy = {...newState.allCampsites}
+            delete campsitesCopy[action.id]
+            newState.allProducts = campsitesCopy
             newState.singleProduct = {}
 
             return newState
         case ADD_IMAGE:
             newState = {...state}
-            const newProductImage = {...state.singleProduct}
-            newProductImage[action.payload.singleProduct] = action.payload.singleProduct
-            newState.products = newProductImage
+            const newCampsiteImage = {...state.singleCampsite}
+            newCampsiteImage[action.payload.singleCampsite] = action.payload.singleCampsite
+            newState.products = newCampsiteImage
             return newState
         default:
             return state;

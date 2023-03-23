@@ -1,7 +1,7 @@
 const ADD_REVIEW = 'reviews/addReview'
 const READ_REVIEW = 'reviews/readReview'
 const DELETE_REVIEW = 'reviews/deleteReview'
-const EDIT_REVIEWS = 'reviews/editReviews' // editing/update a review
+const EDIT_REVIEWS = 'reviews/editReviews'
 
 
 const addReview = (review) => ({
@@ -51,8 +51,8 @@ export const addReviewThunk = (id, review) => async (dispatch) => {
     }
 }
 
-export const readReviewThunk = (productID) => async (dispatch) => {
-    const response = await fetch(`/api/products/${productID}`)
+export const readReviewThunk = (id) => async (dispatch) => {
+    const response = await fetch(`/api/${id}`)
     const reviews = await response.json()
     dispatch(readReview(reviews))
 }
