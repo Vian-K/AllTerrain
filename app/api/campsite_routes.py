@@ -14,7 +14,10 @@ def allCampsites():
     for campsite in campsites:
         cd = campsite.to_dict()
         cdImages = {'campsiteImages': [campsiteimages.to_dict() for campsiteimages in campsite.campsiteimages]}
+        cdReviews = {'reviews': [reviews.to_dict() for reviews in campsite.reviews]}
         cd.update(cdImages)
+        cd.update(cdReviews)
+        print("-----CD------", cd)
         allCampsites.append(cd)
 
     return {'campsites': allCampsites}

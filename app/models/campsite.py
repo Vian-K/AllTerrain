@@ -27,6 +27,7 @@ class Campsite(db.Model):
         return {
             'id': self.id,
             'ownersid': self.ownersid,
+            'details': self.details,
             'name': self.name,
             'location': self.location,
             'cost': self.cost,
