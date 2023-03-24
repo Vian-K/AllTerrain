@@ -84,3 +84,9 @@
     padding: 1rem;
     font-size: medium;
   }
+
+  .infowindowimage {
+    display: flex;
+    width: 150px;
+    height: 75px;
+  }

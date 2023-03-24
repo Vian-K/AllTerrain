@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Campsites from "./components/Campsite";
+import SingleCampsite from "./components/Campsite/SingleCampsite"
 import MapContainer from "./components/Googlemaps";
 
 function App() {
@@ -26,15 +27,29 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Campsites />
           </Route>
-          
-
+          <Route exact path="/campsites/:id">
+            <SingleCampsite />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
 
         </Switch>
       )}
     </>
+  );
+}
+
+function NotFound() {
+
+  return (
+    <div>
+      <h1>404 Not Found</h1>
+      <p>Sorry, the page you are looking for doesn't exist.</p>
+    </div>
   );
 }
 

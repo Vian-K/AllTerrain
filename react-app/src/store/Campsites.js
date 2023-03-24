@@ -1,23 +1,23 @@
-const NEW_CAMPSITE = 'product/newProduct'
-const LOAD_CAMPSITE = 'product/loadProducts'
-const EDIT_CAMPSITE = 'product/editCampsite'
-const DELETE_CAMPSITE = 'product/deleteCampsite'
-const LOAD_ONE_CAMPSITE = 'product/loadOneProduct'
-const ADD_IMAGE = 'product/addImage'
+const NEW_CAMPSITE = 'campsite/newCampsite'
+const LOAD_CAMPSITE = 'campsite/loadCampsites'
+const EDIT_CAMPSITE = 'campsite/editCampsite'
+const DELETE_CAMPSITE = 'campsite/deleteCampsite'
+const LOAD_ONE_CAMPSITE = 'campsite/loadOneCampsite'
+const ADD_IMAGE = 'campsite/addImage'
 
-const creatCampsite = (product) => ({
+const creatCampsite = (campsite) => ({
     type: NEW_CAMPSITE,
-    payload: product
+    payload: campsite
 })
 
-const loadCampsite = (products) => ({
+const loadCampsite = (campsite) => ({
     type: LOAD_CAMPSITE,
-    payload: products
+    payload: campsite
 })
 
-const editCampsite = (product) => ({
+const editCampsite = (campsite) => ({
     type: EDIT_CAMPSITE,
-    payload: product
+    payload: campsite
 })
 
 const deleteCampsite = (id) => ({
@@ -25,14 +25,14 @@ const deleteCampsite = (id) => ({
     payload: id
 })
 
-const singleCampsite = (product) => ({
+const singleCampsite = (campsite) => ({
     type: LOAD_ONE_CAMPSITE,
-    payload: product
+    payload: campsite
 })
 
-const addImages = (product) => ({
+const addImages = (campsite) => ({
     type: ADD_IMAGE,
-    payload: product
+    payload: campsite
 })
 // Thunks
 
