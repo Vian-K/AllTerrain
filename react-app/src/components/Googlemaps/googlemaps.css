@@ -90,3 +90,12 @@
     width: 150px;
     height: 75px;
   }
+
+  .mapcontainer {
+    /* position: absolute; */
+    position: absolute;
+    width: 1584px;
+    height: 437px;
+
+
+   }

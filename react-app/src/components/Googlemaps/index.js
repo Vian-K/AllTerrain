@@ -49,8 +49,8 @@ if (!isLoaded) {
   return null;
 }
 return (
-  <>
-    <div onContextMenu={onRightClick}>
+  <div className="mapcontainer">
+    <div  onContextMenu={onRightClick}>
       <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={selected || center} zoom={10} options={{disableDoubleClickZoom: true}} ref={mapRef} onClick={(e) => mapClick(e)}>
 
       {selected && (
@@ -70,7 +70,7 @@ return (
 
       </GoogleMap>
     </div>
-  </>
+  </div>
 );
         }
 export default MapContainer;

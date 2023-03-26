@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState, useRef} from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { StandaloneSearchBox, GoogleMap, useLoadScript, MarkerF, InfoWindow } from '@react-google-maps/api'
 import "./googlemaps.css"
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ const HomePageMap = () => {
 const [selectedId, setSelectedId] = useState(null);
 const libraries = ['places', 'geometry'];
 const dispatch = useDispatch()
+const history = useHistory()
 const campsites = useSelector(state=> state.CampsiteReducer.allCampsites)
 const campsitesArr = Object.values(campsites)
 console.log( "ENV", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY )
@@ -59,7 +60,10 @@ if (!isLoaded) {
 }
 return (
   <>
-    <div>
+    <div className='mapcontainer'>
+      <div>
+        <button onClick={() => {}}>Campsites</button>
+      </div>
       <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={center} zoom={7}
       options={{disableDoubleClickZoom: true}} ref={mapRef} >
 

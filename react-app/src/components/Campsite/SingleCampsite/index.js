@@ -20,7 +20,22 @@ const SingleCampsite = () => {
             <div>
                <h1>{campsiteDetail.name}</h1>
                <div>
+                <div>
                <p>Details: {campsiteDetail.details}</p>
+                </div>
+            <div>
+               <p>Cost: ${campsiteDetail.cost}/night</p>
+            </div>
+            <div>
+               <p>Cleanliness: {campsiteDetail.cleanliness}</p>
+            </div>
+            <div>
+               <p>Road Difficulty: {campsiteDetail.roaddifficulty}</p>
+            </div>
+            <div>
+               <p>Cell Data: {campsiteDetail.celldata}</p>
+            </div>
+
                 </div>
             </div>
         </div>
