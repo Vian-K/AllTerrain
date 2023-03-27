@@ -9,3 +9,10 @@
     width: 400px;
     height: 200px;
 }
+.inforeviewbuttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    width: 90%;
+}

@@ -50,6 +50,7 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+        <button onClick={() => dispatch(login("demo@aa.io", "password")).then(() => closeModal())}>Demo User</button>
     </>
   );
 }

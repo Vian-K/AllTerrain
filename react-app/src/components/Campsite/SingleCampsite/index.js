@@ -9,6 +9,7 @@ const SingleCampsite = () => {
     const id = useParams()
     const history = useHistory()
     const campsiteDetail = useSelector(state => state.CampsiteReducer.singleCampsite.campsite)
+    const user = useSelector(state => state.session.user)
     console.log("DETAIL", campsiteDetail)
     useEffect(() => {
         dispatch(singleCampsiteThunk(id.id))
@@ -20,8 +21,11 @@ const SingleCampsite = () => {
 
     return(
         <div className="maindetailscontainer">
+            <div className="inforeviewbuttons">
                     <button>Info</button>
                         <button>Reviews</button>
+
+            </div>
             <div>
                 <div>
                     {campsiteDetail.campsiteimages.map(({image}) => {
@@ -57,12 +61,20 @@ const SingleCampsite = () => {
                <p>Land Type: {campsiteDetail.landtype}</p>
             </div>
                 <div>
-                    <button onClick={() => history.push(`/campsites/edit/${id.id}`)}>Edit Campsite</button>
+                {user && campsiteDetail.owner === user?.id ? (
+                    <div>
+               <button onClick={() => history.push(`/campsites/edit/${id.id}`)}>Edit Campsite</button>
+
+               <button onClick={() =>
+                   dispatch(deleteCampsiteThunk(id.id))
+                   .then(() => history.push('/'))}
+                   >Delete Campsite</button>
+
                 </div>
-                <button onClick={() =>
-                    dispatch(deleteCampsiteThunk(id.id))
-                    .then(() => history.push('/'))}
-                    >Delete Campsite</button>
+
+            ) : null}
+
+                </div>
                 </div>
             </div>
         </div>
