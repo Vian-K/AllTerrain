@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -8,6 +8,7 @@ import HomePageMap from '../Googlemaps/homepagemap';
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
+	// const redirect = Redirect()
 	return (
 		<div className="container">
 		  <nav className="navbar">
@@ -20,7 +21,7 @@ function Navigation({ isLoaded }){
 			)}
 
 			<div className="addbutton">
-			  <button>Add a Campsite</button>
+			  <button onClick={() => history.push("/campsites")}>Add a Campsite</button>
 			</div>
 			<div className='Myplacesbutton'>
 

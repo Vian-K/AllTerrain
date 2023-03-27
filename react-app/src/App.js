@@ -8,6 +8,8 @@ import Navigation from "./components/Navigation";
 import Campsites from "./components/Campsite";
 import SingleCampsite from "./components/Campsite/SingleCampsite"
 import MapContainer from "./components/Googlemaps";
+import CreateCampsite from "./components/Campsite/AddCampsite";
+import EditCampsite from "./components/Campsite/EditCampsite"
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +34,12 @@ function App() {
           </Route>
           <Route exact path="/campsites/:id">
             <SingleCampsite />
+          </Route>
+          <Route exact path='/campsites/'>
+            <CreateCampsite />
+          </Route>
+          <Route exact path='/campsites/edit/:id'>
+            <EditCampsite />
           </Route>
           <Route path="*">
             <NotFound />

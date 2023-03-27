@@ -1,22 +1,32 @@
 import { useEffect } from "react";
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { singleCampsiteThunk } from "../../../store/Campsites";
+import { deleteCampsiteThunk, editCampsiteThunk, singleCampsiteThunk } from "../../../store/Campsites";
+import "./singlecampsite.css"
 
 const SingleCampsite = () => {
     const dispatch = useDispatch()
     const id = useParams()
+    const history = useHistory()
     const campsiteDetail = useSelector(state => state.CampsiteReducer.singleCampsite.campsite)
     console.log("DETAIL", campsiteDetail)
     useEffect(() => {
         dispatch(singleCampsiteThunk(id.id))
     }, [dispatch])
+
     if(!campsiteDetail) {
         return null;
     }
+
     return(
-        <div>
-            <h1>Test</h1>
+        <div className="maindetailscontainer">
+            <div>
+            <button>Info</button>
+                <button>Reviews</button>
+            </div>
+            <div>
+            </div>
+
             <div>
                <h1>{campsiteDetail.name}</h1>
                <div>
@@ -35,7 +45,13 @@ const SingleCampsite = () => {
             <div>
                <p>Cell Data: {campsiteDetail.celldata}</p>
             </div>
-
+                <div>
+                    <button onClick={() => history.push(`/campsites/edit/${id.id}`)}>Edit Campsite</button>
+                </div>
+                <button onClick={() =>
+                    dispatch(deleteCampsiteThunk(id.id))
+                    .then(() => history.push('/'))}
+                    >Delete Campsite</button>
                 </div>
             </div>
         </div>

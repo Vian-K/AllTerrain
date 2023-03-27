@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useState, useRef} from 'react';
 import { StandaloneSearchBox, GoogleMap, useLoadScript, MarkerF, InfoWindow } from '@react-google-maps/api'
 import "./googlemaps.css"
-const google = window.google ? window.google : {}
 
-const MapContainer = () => {
+
+const MapContainer = ({setLocation}) => {
 const [selected, setSelected] = useState(null);
+
 const libraries = ['places', 'geometry'];
 
 
@@ -21,7 +22,7 @@ const center = {
     lng: -118.2437
   };
 const containerStyle = {
-    width: 'calc(100% - 300px)',
+    width: '100%',
     height: '900px',
     left: '300px'
 
@@ -35,6 +36,13 @@ const mapClick = (e) => {
       // mapRef.current.panTo({lat, lng})
       setSelected({lat, lng});
 
+  }
+  const setCoordinates = () => {
+    if (selected) {
+      const { lat, lng } = selected;
+      setLocation(`${lat}, ${lng}`)
+
+    }
   }
 
 const onRightClick = (e) => {
@@ -62,6 +70,7 @@ return (
 
                 <p>Latitude: {selected.lat.toFixed(4)}</p>
                 <p>Longitude: {selected.lng.toFixed(4)}</p>
+                <button onClick={(e) => setCoordinates(e)}>Select</button>
               </div>
             </InfoWindow>
           </MarkerF>

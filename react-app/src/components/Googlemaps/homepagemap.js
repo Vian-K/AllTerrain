@@ -5,6 +5,7 @@ import { StandaloneSearchBox, GoogleMap, useLoadScript, MarkerF, InfoWindow } fr
 import "./googlemaps.css"
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCampsiteThunk } from '../../store/Campsites';
+import ReactStars from 'react-rating-stars-component';
 
 
 const HomePageMap = () => {
@@ -14,11 +15,12 @@ const dispatch = useDispatch()
 const history = useHistory()
 const campsites = useSelector(state=> state.CampsiteReducer.allCampsites)
 const campsitesArr = Object.values(campsites)
-console.log( "ENV", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY )
+// console.log( "ENV", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY )
 let img;
 const avgReview = () => {
   let allRatingsArray = []
   campsitesArr.forEach(({reviews}) => {
+
     reviews.forEach(review => {
       if (review.length === 0) return null
       allRatingsArray.push(review.rating)
@@ -28,7 +30,6 @@ const avgReview = () => {
   let avgRating = allRatingsArray.reduce((a, b) => a + b, initialValue);
   return (avgRating/allRatingsArray.length).toFixed(2)
 }
-
 
 
 useEffect(() => {
@@ -61,20 +62,24 @@ if (!isLoaded) {
 return (
   <>
     <div className='mapcontainer'>
-      <div>
+      {/* <div>
         <button onClick={() => {}}>Campsites</button>
-      </div>
+      </div> */}
       <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={center} zoom={7}
       options={{disableDoubleClickZoom: true}} ref={mapRef} >
 
 {campsites &&
-        campsitesArr.map(({ id, name, location, campsiteImages }) => {
-          campsiteImages.map(({ image }) => {
+        campsitesArr?.map(({ id, name, location, campsiteImages }) => {
+          campsiteImages?.map(({ image }) => {
             img = image;
           });
 
-          let pos = location.split(",");
-          const posObj = { lat: parseInt(pos[0]), lng: parseInt(pos[1]) };
+          let pos = location?.split(",");
+          let posObj
+          if(pos) {
+            posObj = { lat: parseInt(pos[0]), lng: parseInt(pos[1]) };
+
+          }
 
           return (
             <MarkerF
@@ -87,10 +92,27 @@ return (
                   <div>
                     <NavLink to={`/campsites/${id}`}>
                       <img className="infowindowimage" src={img} />
-                      <h>{name}</h>
+                      <h4>{name}</h4>
                     </NavLink>
-                    <p>{avgReview()}</p>
+                    <div>
+                    {avgReview && avgReview() > 0 ? (
+                     <>
+                    <ReactStars
+                      count={5}
+                      value={avgReview()}
+                      size={20}
+                      isHalf={true}
+                      edit={false}
+                      activeColor="#ffd700"
+                          />
+                  <p>{avgReview()}</p>
+                     </>
+                  ) : (
+                  <p>No reviews</p>
+                    )}
                   </div>
+
+                </div>
                 </InfoWindow>
               )}
             </MarkerF>

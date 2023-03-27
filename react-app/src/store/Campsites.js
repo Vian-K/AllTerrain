@@ -5,7 +5,7 @@ const DELETE_CAMPSITE = 'campsite/deleteCampsite'
 const LOAD_ONE_CAMPSITE = 'campsite/loadOneCampsite'
 const ADD_IMAGE = 'campsite/addImage'
 
-const creatCampsite = (campsite) => ({
+const createCampsite = (campsite) => ({
     type: NEW_CAMPSITE,
     payload: campsite
 })
@@ -37,19 +37,19 @@ const addImages = (campsite) => ({
 // Thunks
 
 export const createCampsiteThunk = (campsite) => async (dispatch) => {
+    console.log("CAMPSITE", campsite)
     const response = await fetch(`/api/campsites/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(campsite)
+        body: JSON.stringify(campsite.campsiteData)
     })
     let campsiteData;
     if(response.ok){
         campsiteData = await response.json()
-        // const productData = await response.json()
-        // console.log("PRODUCTDATA", productData)
-        const res = await fetch(`/api/campsiteImages/`, {
+        console.log("campsiteDATA", campsiteData)
+        const res = await fetch(`/api/campsiteimages/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -57,16 +57,18 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
             body: JSON.stringify({
                 image: campsite.imgData.image,
                 previewImage: campsite.imgData.preview,
-                campsite_id: campsiteData.id
+                campsiteid: campsiteData.id
             })
         })
 
-        if(res.ok){
+        if(res.ok) {
             const resData = await res.json()
+            console.log("RESDATA", resData)
             campsiteData.campsiteImages = [resData]
             // console.log("PRODUCTDATA", ProductData)
 
-            dispatch(creatCampsite(campsiteData))
+            dispatch(createCampsite(resData))
+
             return
         }
 
@@ -90,7 +92,7 @@ export const singleCampsiteThunk = (id) => async (dispatch) => {
 
 
 export const editCampsiteThunk = (campsiteID, editedCampsite, imgData) => async (dispatch) => {
-
+    
     const response = await fetch(`/api/campsites/${campsiteID}`, {
         method:'PUT',
         headers: {
@@ -102,13 +104,13 @@ export const editCampsiteThunk = (campsiteID, editedCampsite, imgData) => async 
     let data = await response.json()
     let data2;
 
-    if (response.ok && imgData.img_url.length > 5 ) {
-        const response2 = await fetch(`/api/campsiteImages/${campsiteID}`, {
+    if (response.ok && imgData.image.length > 5 ) {
+        const response2 = await fetch(`/api/campsiteimages/${campsiteID}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(imgData)
+            body: JSON.stringify(imgData.image)
         })
         data2 = await response2.json()
     }
