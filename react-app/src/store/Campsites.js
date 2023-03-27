@@ -56,7 +56,7 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
             },
             body: JSON.stringify({
                 image: campsite.imgData.image,
-                previewImage: campsite.imgData.preview,
+                preview: campsite.imgData.preview,
                 campsiteid: campsiteData.id
             })
         })
@@ -66,8 +66,9 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
             console.log("RESDATA", resData)
             campsiteData.campsiteImages = [resData]
             // console.log("PRODUCTDATA", ProductData)
-
-            dispatch(createCampsite(resData))
+            // console.log("CAMP", campsiteData.campsiteImages)
+            dispatch(createCampsite(campsiteData))
+            // dispatch(addImages(campsite.imgData))
 
             return
         }
@@ -87,12 +88,14 @@ export const singleCampsiteThunk = (id) => async (dispatch) => {
     const data = await response.json()
 
     dispatch(singleCampsite(data))
-    return response
+    return data
 }
 
 
 export const editCampsiteThunk = (campsiteID, editedCampsite, imgData) => async (dispatch) => {
-    
+    console.log("EDITEDCAMPSITE", editedCampsite)
+    console.log("EDITEDIMGDATA", imgData)
+    console.log("IDDDD", campsiteID)
     const response = await fetch(`/api/campsites/${campsiteID}`, {
         method:'PUT',
         headers: {
@@ -110,7 +113,11 @@ export const editCampsiteThunk = (campsiteID, editedCampsite, imgData) => async 
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(imgData.image)
+            body: JSON.stringify({
+                image: imgData.image,
+                preview: imgData.preview,
+                campsiteid: campsiteID
+            })
         })
         data2 = await response2.json()
     }
@@ -132,6 +139,7 @@ export const deleteCampsiteThunk = (id) => async (dispatch) => {
     if (response.ok) {
         // const data = await response.json()
         dispatch(deleteCampsite(id))
+        console.log("RESPONSE", response)
         return response
     }
 }
@@ -144,8 +152,8 @@ export const CampsiteReducer = (state = initialState, action) => {
         case LOAD_CAMPSITE:
             newState = {...state}
             let allCampsitesCopy = {}
-            action.payload.campsites.forEach(product => {
-                allCampsitesCopy[product.id] = product
+            action.payload.campsites.forEach(campsite => {
+                allCampsitesCopy[campsite.id] = campsite
             })
             newState.allCampsites = allCampsitesCopy
             return newState
@@ -170,16 +178,17 @@ export const CampsiteReducer = (state = initialState, action) => {
         case DELETE_CAMPSITE:
             newState={...state}
             let campsitesCopy = {...newState.allCampsites}
-            delete campsitesCopy[action.id]
-            newState.allProducts = campsitesCopy
-            newState.singleProduct = {}
+            delete campsitesCopy[action.payload]
+            newState.allCampsites= campsitesCopy
+            newState.singleCampsite = {}
 
             return newState
         case ADD_IMAGE:
             newState = {...state}
+            console.log("NEWSTATE", newState)
             const newCampsiteImage = {...state.singleCampsite}
             newCampsiteImage[action.payload.singleCampsite] = action.payload.singleCampsite
-            newState.products = newCampsiteImage
+            newState.campsite = newCampsiteImage
             return newState
         default:
             return state;

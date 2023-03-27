@@ -34,6 +34,7 @@ const CreateCampsite = () => {
         celldata,
         accessibility
 
+
     }
 
     const imgData = {
@@ -61,7 +62,7 @@ const CreateCampsite = () => {
             setErrors(errors => [...errors, "Cost must be a number"])
             return
         }
-        if (location.length === 0 || location.length > 30) {
+        if (location.length === 0 || location.length > 75) {
             setErrors(errors => [...errors, "Please enter a valid location (less than 30 characters)"])
             return
         }
@@ -247,7 +248,7 @@ const CreateCampsite = () => {
             type="text"
             value={image}
             placeholder="Image Url"
-            maxLength={50}
+            
             onChange={(e) => {
                 setImage(e.target.value)
             }}

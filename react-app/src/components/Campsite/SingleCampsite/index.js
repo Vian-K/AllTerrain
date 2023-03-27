@@ -20,9 +20,14 @@ const SingleCampsite = () => {
 
     return(
         <div className="maindetailscontainer">
+                    <button>Info</button>
+                        <button>Reviews</button>
             <div>
-            <button>Info</button>
-                <button>Reviews</button>
+                <div>
+                    {campsiteDetail.campsiteimages.map(({image}) => {
+                        return <img className="detailsimages" src={image}></img>
+                    })}
+                </div>
             </div>
             <div>
             </div>
@@ -43,7 +48,13 @@ const SingleCampsite = () => {
                <p>Road Difficulty: {campsiteDetail.roaddifficulty}</p>
             </div>
             <div>
+               <p>Accessibility: {campsiteDetail.accessibility}</p>
+            </div>
+            <div>
                <p>Cell Data: {campsiteDetail.celldata}</p>
+            </div>
+            <div>
+               <p>Land Type: {campsiteDetail.landtype}</p>
             </div>
                 <div>
                     <button onClick={() => history.push(`/campsites/edit/${id.id}`)}>Edit Campsite</button>

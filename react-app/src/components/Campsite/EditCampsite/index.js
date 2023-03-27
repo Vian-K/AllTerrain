@@ -14,7 +14,24 @@ const EditCampsite = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const campsite = useSelector(state => state.CampsiteReducer.singleCampsite)
+    useEffect(() => {
+        const data = async () => {
+            const campsite = await dispatch(singleCampsiteThunk(id.id))
+            // console.log("CAMPSITESSSSSSSSS", campsite)
+            setName(campsite.campsite.name)
+            setDetails(campsite.campsite.details)
+            setLocation(campsite.campsite.location)
+            setLandtype(campsite?.campsite?.landtype)
+            setCost(campsite?.campsite?.cost)
+            setRoaddifficulty(campsite?.campsite?.roaddifficulty)
+            setCleanliness(campsite?.campsite?.cleanliness)
+            setCelldata(campsite?.campsite?.celldata)
+            setAccessibility(campsite?.campsite?.accessibility)
+            setImage(campsite?.campsite?.campsiteimages[0].image)
 
+        }
+        data()
+    }, [dispatch])
 
     const [name, setName ] = useState(campsite?.campsite?.name || '' )
     const [details, setDetails ] = useState(campsite?.campsite?.details || '')
@@ -28,7 +45,7 @@ const EditCampsite = () => {
     const [image, setImage ] = useState('')
     const [errors, setErrors ] = useState([])
     const [showMap, setShowMap] = useState(false)
-    console.log("CAMPSITE", id)
+    // console.log("CAMPSITE", campsite)
 
     if(!campsite) {
         return null
@@ -74,7 +91,7 @@ const EditCampsite = () => {
             setErrors(errors => [...errors, "Cost must be a number"])
             return
         }
-        if (location.length === 0 || location.length > 30) {
+        if (!location || location.length === 0) {
             setErrors(errors => [...errors, "Please enter a valid location (less than 30 characters)"])
             return
         }
@@ -82,29 +99,30 @@ const EditCampsite = () => {
         //     setErrors(errors => [...errors, 'Please select an option for all drop-downs'])
         //     return
         // }
-        // if (image.length === 0) {
-        //     setErrors(errors => [...errors, 'Please include a image url'])
-        //     return
-        // }
-        // try {
-        // const imageUrl = new URL(image)
-        //   if (imageUrl.protocol !== 'http:' && imageUrl.protocol !== 'https:') {
-        //     setErrors(errors => [...errors, 'Please enter a valid image link (http/https protocol)']);
-        //     return;
-        //   }
-        //     } catch (error) {
-        //           setErrors(errors => [...errors, 'Please enter a valid image link']);
-        //           return;
-        //       }
-
-              dispatch(editCampsiteThunk(id.id, campsiteData, imgData))
-              .then(() => history.push(`/campsites/${id.id}`))
-            //   .catch(async (res) => {
-            //     // console.log("RES", res)
-            //     const data = await res.json();
-            //     if (data && data.errors) setErrors(data.errors)
-            //   });
+        if (image.length === 0) {
+            setErrors(errors => [...errors, 'Please include a image url'])
+            return
+        }
+        try {
+            const imageUrl = new URL(image)
+            if (imageUrl.protocol !== 'http:' && imageUrl.protocol !== 'https:') {
+                setErrors(errors => [...errors, 'Please enter a valid image link (http/https protocol)']);
+                return;
             }
+        } catch (error) {
+            setErrors(errors => [...errors, 'Please enter a valid image link']);
+            return;
+        }
+
+            dispatch(editCampsiteThunk(id.id, campsiteData, imgData))
+            .then(() => history.push(`/campsites/${id.id}`))
+            // .catch(async (res) => {
+            //     console.log("RES", res)
+            //     const data = await res.json();
+            //     console.log("DATA", data)
+            //     if (data && data.errors) setErrors(data.errors)
+            // });
+        }
     const openMap = () => {
         setShowMap(!showMap);
     }
@@ -256,7 +274,7 @@ const EditCampsite = () => {
             type="text"
             value={image}
             placeholder="Image Url"
-            maxLength={50}
+            
             onChange={(e) => {
                 setImage(e.target.value)
             }}

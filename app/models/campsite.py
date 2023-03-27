@@ -31,6 +31,7 @@ class Campsite(db.Model):
             'name': self.name,
             'location': self.location,
             'cost': self.cost,
+            'landtype': self.landtype,
             'roaddifficulty': self.roaddifficulty,
             'cleanliness': self.cleanliness,
             'celldata': self.celldata,

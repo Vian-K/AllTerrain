@@ -47,6 +47,7 @@ def editCampsiteImages(id):
         imageobj = image.to_dict()
     return imageobj
 
+
 @campsiteimages_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def deleteCampsiteImage(id):
