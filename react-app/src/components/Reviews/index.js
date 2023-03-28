@@ -101,13 +101,19 @@ export const Reviews = () => {
                      <>
                     <ReactStars
                       count={5}
-                      value={avgReview()}
+                      value={rating}
                       size={20}
                       isHalf={true}
                       edit={false}
                       activeColor="#ffd700"
                           />
-                    <button className="deletereviewbutton" onClick={() => dispatch(deleteReviewThunk(id)).then(() => dispatch(readReviewThunk(ID)))}>Delete</button>
+                          {user && userId === userid ? (
+                              <button className="deletereviewbutton"
+                              onClick={() =>
+                                dispatch(deleteReviewThunk(id))
+                                .then(() => dispatch(readReviewThunk(ID)))}>Delete</button>
+                              ) : null }
+
 
                      </>
                   ) : (
