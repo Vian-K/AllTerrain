@@ -15,7 +15,7 @@ class Review(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.String(), nullable=False)
 
-    campsite = db.relationship("Campsite", back_populates='reviews', cascade='all, delete')
+    campsite = db.relationship("Campsite", back_populates='reviews')
     users = db.relationship("User", back_populates='reviews')
 
     def to_dict(self):

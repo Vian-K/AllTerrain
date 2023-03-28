@@ -8,19 +8,14 @@ const addReview = (review) => ({
     type: ADD_REVIEW,
     payload: review
 })
-
 const readReview = (reviews) => ({
     type: READ_REVIEW,
     payload: reviews
 })
-
 export const updateReview = (reviews) => ({
     type: EDIT_REVIEWS,
     payload: reviews
 })
-
-
-
 const deleteReview = (reviewId) => ({
     type: DELETE_REVIEW,
     payload: reviewId
@@ -31,14 +26,14 @@ export const addReviewThunk = (id, review) => async (dispatch) => {
 
     // console.log("REVIEW", review)
     // console.log("ID", id)
-    const response = await fetch(`/api/products/${id}/reviews` , {
+    const response = await fetch("/api/reviews/" , {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            user_id: review.userId,
-            product_id: id,
+            userid: review.userId,
+            campsiteid: id,
             review: review.review,
             rating: review.rating
         })
@@ -52,23 +47,23 @@ export const addReviewThunk = (id, review) => async (dispatch) => {
 }
 
 export const readReviewThunk = (id) => async (dispatch) => {
-    const response = await fetch(`/api/${id}`)
+    const response = await fetch(`/api/campsites/${id}`)
     const reviews = await response.json()
     dispatch(readReview(reviews))
 }
 
-export const editReviewThunk = (review) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${review.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(review)
-    })
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(updateReview(data))
-        return data
-    }
-}
+// export const editReviewThunk = (review) => async (dispatch) => {
+//     const response = await fetch(`/api/reviews/${review.id}`, {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(review)
+//     })
+//     if (response.ok) {
+//         const data = await response.json()
+//         dispatch(updateReview(data))
+//         return data
+//     }
+// }
 
 
 
@@ -90,7 +85,7 @@ export const deleteReviewThunk = (id) => async (dispatch) => {
 //initial state
 
 let initialState = {
-    ProductReviews:{},
+    CampsiteReviews:{},
     UserReviews:{}
 }
 //REDUCER
@@ -101,17 +96,18 @@ export const reviewsReducer = (state = initialState, action) => {
         case READ_REVIEW:
             newState = { ...state}
             let reviewsCopy = {}
-
-            action.payload.reviews.forEach(review => {
+            action.payload.campsite.reviews.forEach(review => {
                 reviewsCopy[review.id] = review
             })
-            newState.ProductReviews = reviewsCopy
+            newState.CampsiteReviews = reviewsCopy
             return newState
         case ADD_REVIEW:
             newState = {...state}
-            let newStateCopy = {...newState.ProductReviews}
+            let newStateCopy = {...newState.CampsiteReviews}
+            console.log("ACTIONPAYLOAD", action.payload)
             newStateCopy[action.payload.id] = action.payload
-            newState.allProducts = newStateCopy
+            newState.CampsiteReviews = newStateCopy
+            console.log("NEWSTATECOPY", newStateCopy)
             return newState
 
         case EDIT_REVIEWS:
@@ -120,9 +116,12 @@ export const reviewsReducer = (state = initialState, action) => {
             return { ...state, reviews: updatedReviews }
         case DELETE_REVIEW:
             newState = {...state}
-            let reviewCopy = {...newState.ProductReviews}
+            let reviewCopy = {...newState.CampsiteReviews}
+            console.log("reviewCopy", reviewCopy)
+            console.log("ACTIONPAYLOAD", action.payload)
+
             delete reviewCopy[action.payload.id]
-            newState.ProductReviews = reviewCopy
+            newState.CampsiteReviews = reviewCopy
             return newState
         default:
             return state;

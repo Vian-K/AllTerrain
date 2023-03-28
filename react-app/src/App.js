@@ -44,6 +44,9 @@ function App() {
           <Route path="*">
             <NotFound />
           </Route>
+          <Route path="/campsites/*">
+            <NotFound />
+          </Route>
 
         </Switch>
       )}

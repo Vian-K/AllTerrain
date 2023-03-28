@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router-dom'
-import { readReviewThunk, addReviewThunk, deleteReviewThunk } from '../../store/reviews'
-import TrashIcon from '../Icons/trashcan'
+import { addReviewThunk, deleteReviewThunk, readReviewThunk } from '../../store/Reviews'
+import ReactStars from 'react-rating-stars-component';
 import './review.css'
 
 export const Reviews = () => {
@@ -11,10 +11,12 @@ export const Reviews = () => {
     const ID = parseInt(id.id)
     const [review, setReviews] = useState()
     const [rating, setRating] = useState(5)
-    const reviewsObj = useSelector(state => state.reviewsReducer.ProductReviews)
+    const reviewsObj = useSelector(state => state.reviewsReducer.CampsiteReviews)
+    const reviews = Object.values(reviewsObj)
+    // console.log("REVIEWSOBJ", reviews)
+    // console.log("REVIEWSOBJ", reviewsObj)
     const user = useSelector(state => state.session.user)
     const userId = user?.id
-    const reviews = Object.values(reviewsObj)
     const [errors, setErrors] = useState([])
     const [showForm, setShowForm] = useState(false)
 
@@ -33,7 +35,7 @@ export const Reviews = () => {
             }, 2000)
             return
         }
-        return dispatch(addReviewThunk(ID, { userId, id, review, rating }))
+        return dispatch(addReviewThunk(ID, { userId, review, rating }))
             .then(() => {
                 dispatch(readReviewThunk(id.id))
                 setShowForm(false)
@@ -52,7 +54,7 @@ export const Reviews = () => {
                 }, 2000);
               });
     }
-    const userHasReview = reviews.some(({user_id}) => user_id === userId)
+    const userHasReview = reviews.some(({userid}) => userid === userId)
     const loggedIn = () => {
         if(!user) {
            return <p>Please log in to post a review.</p>
@@ -61,30 +63,116 @@ export const Reviews = () => {
         }
     }
     const reviewCheck = () => {
-        if(Object.keys(reviewsObj).length === 0) {
+        if(Object.keys(reviews).length === 0) {
             return <p>There are no reviews for this product yet!</p>
         } else {
             return null;
         }
     }
 
-    // const avgReview = () => {
-    //   console.log("REVIEWOBJ==========>", Object.values(reviewsObj))
-    //   let reviewsArray = Object.values(reviewsObj)
-    //   if (reviewsArray.length === 0 ) return null
-    //   let ratingsArray = []
-    //   reviewsArray.forEach(review => {
-    //     ratingsArray.push(review.rating)
-    //   })
-    //   let initialValue = 0
-    //   let avgRating = ratingsArray.reduce((a, b) => a + b, initialValue);
+    const avgReview = () => {
 
-    //   return(avgRating/ratingsArray.length).toFixed(2)
+      let reviewsArray = Object.values(reviews)
+      if (reviewsArray.length === 0 ) return null
+      let ratingsArray = []
+      reviewsArray.forEach(review => {
+        ratingsArray.push(review.rating)
+      })
+      let initialValue = 0
+      let avgRating = ratingsArray.reduce((a, b) => a + b, initialValue);
+
+      return(avgRating/ratingsArray.length).toFixed(2)
+    }
+
+    const newRating = (newRating) => {
+        setRating(newRating)
     }
     return (
-        <div></div>
+        <div>
+            <h1>Reviews</h1>
+                {reviews.map(({id ,userid, review, rating, created_at}) => {
+                    const date =  new Date(created_at).toLocaleDateString('en-US')
+                    return <div>
+                        <p>{date}</p>
+                        <p>{review}</p>
+
+                        <div>
+                        {avgReview && avgReview() > 0 ? (
+                     <>
+                    <ReactStars
+                      count={5}
+                      value={avgReview()}
+                      size={20}
+                      isHalf={true}
+                      edit={false}
+                      activeColor="#ffd700"
+                          />
+                    <button className="deletereviewbutton" onClick={() => dispatch(deleteReviewThunk(id)).then(() => dispatch(readReviewThunk(ID)))}>Delete</button>
+
+                     </>
+                  ) : (
+                      <p>No reviews</p>
+                      )}
+                  </div>
+                    </div>
+                })
+                }
+                 <div>
+            {/* {console.log("REVIEWSOBJ", reviewsObj)} */}
+            {user && reviews.userid !== userId ? (
+              userHasReview ? null : (
+                showForm ? (
+                  <div>
+                    <form className="reviewsform" onSubmit={handleSubmit} noValidate>
+                      <ul className="ul">
+                        {errors.map((error, idx) => (
+                          <li key={idx}>{error}</li>
+                        ))}
+                      </ul>
+                      <textarea
+                        className="reviewtextbox"
+                        type="textbox"
+                        defaultValue="Post a review here!"
+                        onFocus={(e) => {
+                          if (e.target.defaultValue === "Post a review here!") {
+                            setReviews("");
+                          }
+                        }}
+                        value={review}
+                        maxLength={255}
+                        onChange={(e) => {
+                          setReviews(e.target.value);
+                        }}
+                        required
+                      ></textarea>
+                     <ReactStars
+                        count={5}
+                        value={rating}
+                        onChange={newRating}
+                        size={22}
+                        isHalf={true}
+                        emptyIcon={<i className="far fa-star"></i>}
+                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                        fullIcon={<i className="fa fa-star"></i>}
+                        activeColor="#ffd700"
+                    />
+                      <button className="submitbutton" type="submit">
+                        Submit
+                      </button>
+                    </form>
+                    <button className="cancelbutton" onClick={() => setShowForm(false)}>Cancel</button>
+                  </div>
+                ) : (
+                  <button className="add-review-btn" onClick={() => setShowForm(true)}>Add a Review</button>
+                )
+              )
+            ) : (
+              null
+            )}
+           <p>{loggedIn()}</p>
+           <p>{reviewCheck()}</p>
+        </div>
+        </div>
       );
-
-
-
-
+    }
+export default Reviews;

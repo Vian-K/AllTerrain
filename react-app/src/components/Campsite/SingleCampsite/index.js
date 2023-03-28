@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCampsiteThunk, editCampsiteThunk, singleCampsiteThunk } from "../../../store/Campsites";
+import Reviews from "../../Reviews";
 import "./singlecampsite.css"
 
 const SingleCampsite = () => {
@@ -10,7 +11,7 @@ const SingleCampsite = () => {
     const history = useHistory()
     const campsiteDetail = useSelector(state => state.CampsiteReducer.singleCampsite.campsite)
     const user = useSelector(state => state.session.user)
-    console.log("DETAIL", campsiteDetail)
+    // console.log("DETAIL", campsiteDetail)
     useEffect(() => {
         dispatch(singleCampsiteThunk(id.id))
     }, [dispatch])
@@ -76,6 +77,9 @@ const SingleCampsite = () => {
 
                 </div>
                 </div>
+            </div>
+            <div>
+                <Reviews />
             </div>
         </div>
     )
