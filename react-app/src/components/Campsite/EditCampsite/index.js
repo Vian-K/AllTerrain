@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, Switch, Route, useHistory, useParams } from 'react-router-dom'
 import MapContainer from '../../Googlemaps'
-
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import { editCampsiteThunk, singleCampsiteThunk } from '../../../store/Campsites'
+import "./editcampsite.css"
 
 const EditCampsite = () => {
+    const SliderComponent = Slider;
     const id = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
@@ -231,41 +234,41 @@ const EditCampsite = () => {
             </label>
             <label className="cleanlinesslabel">
             Cleanliness
-            <select className="cleanlinessselect" value={cleanliness} onChange={(e) => setCleanliness(e.target.value)}>
-                    <option value="" disabled>Select Level of Cleanliness</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-
-                    </select>
+            <SliderComponent
+                 className="cleanlinessselect"
+                min={1}
+                max={5}
+                marks={{ 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                step={1}
+                value={cleanliness}
+                onChange={(e) => setCleanliness(e)}
+                />
 
             </label>
             <label className="roaddifficultylabel">
             Road Difficulty
-            <select className="roaddifficultyselect" value={roaddifficulty} onChange={(e) => setRoaddifficulty(e.target.value)}>
-                    <option value="" disabled>Select Road Difficulty Level</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-
-                    </select>
+            <SliderComponent
+                 className="roaddifficultyselect"
+                min={1}
+                max={5}
+                marks={{ 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                step={1}
+                value={roaddifficulty}
+                onChange={(e) => setRoaddifficulty(e)}
+                />
 
             </label>
             <label className="accessibilitylabel">
             Accessibility
-            <select className="accessibilityselect" value={accessibility} onChange={(e) => setAccessibility(e.target.value)}>
-                    <option value="" disabled>Select level of Accessibility</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-
-                    </select>
+            <SliderComponent
+                 className="accessibilityselect"
+                min={1}
+                max={5}
+                marks={{ 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                step={1}
+                value={accessibility}
+                onChange={(e) => setAccessibility(e)}
+                />
 
             </label>
             <label className="imagelabel">
@@ -274,7 +277,7 @@ const EditCampsite = () => {
             type="text"
             value={image}
             placeholder="Image Url"
-            
+
             onChange={(e) => {
                 setImage(e.target.value)
             }}

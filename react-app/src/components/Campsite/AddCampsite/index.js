@@ -3,22 +3,26 @@ import {useDispatch, useSelector} from "react-redux"
 import { NavLink, Switch, Route, useHistory } from 'react-router-dom'
 import { createCampsiteThunk } from '../../../store/Campsites'
 import MapContainer from '../../Googlemaps'
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
 import "./addcampsite.css"
 
 const CreateCampsite = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
+    const SliderComponent = Slider;
 
     const [name, setName ] = useState('')
     const [details, setDetails ] = useState('')
     const [location, setLocation ] = useState('')
     const [landtype, setLandtype ] = useState('')
     const [cost, setCost ] = useState('')
-    const [roaddifficulty, setRoaddifficulty ] = useState('')
-    const [cleanliness, setCleanliness ] = useState('')
+    const [roaddifficulty, setRoaddifficulty ] = useState()
+    const [cleanliness, setCleanliness ] = useState()
     const [celldata, setCelldata ] = useState('')
-    const [accessibility, setAccessibility ] = useState('')
+    const [accessibility, setAccessibility ] = useState()
     const [image, setImage ] = useState('')
     const [errors, setErrors ] = useState([])
     const [showMap, setShowMap] = useState(false)
@@ -100,7 +104,9 @@ const CreateCampsite = () => {
 
 
     if(!user) {
-        return <h3>You must be logged in to create a Campsite.</h3>
+        return <div>
+            <h3 className="errormessage">You must be logged in to create a campsite.</h3>
+            </div>
     }
     return(
         <div className="createmaincontainer">
@@ -153,7 +159,7 @@ const CreateCampsite = () => {
             </label>
             <label className="detailslabel">
             Details
-            <input className="details-form"
+            <textarea className="details-form"
             type="text"
             value={details}
             placeholder="Details"
@@ -162,7 +168,7 @@ const CreateCampsite = () => {
                 setDetails(e.target.value)
             }}
             required
-            ></input>
+            ></textarea>
             </label>
             <label className="costlabel">
             Cost
@@ -205,41 +211,41 @@ const CreateCampsite = () => {
             </label>
             <label className="cleanlinesslabel">
             Cleanliness
-            <select className="cleanlinessselect" value={cleanliness} onChange={(e) => setCleanliness(e.target.value)}>
-                    <option value="" disabled>Select Level of Cleanliness</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-
-                    </select>
+            <SliderComponent
+                 className="cleanlinessselect"
+                min={1}
+                max={5}
+                marks={{ 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                step={1}
+                value={cleanliness}
+                onChange={(e) => setCleanliness(e)}
+                />
 
             </label>
             <label className="roaddifficultylabel">
             Road Difficulty
-            <select className="roaddifficultyselect" value={roaddifficulty} onChange={(e) => setRoaddifficulty(e.target.value)}>
-                    <option value="" disabled>Select Road Difficulty Level</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-
-                    </select>
+            <SliderComponent
+                 className="roaddifficultyselect"
+                min={1}
+                max={5}
+                marks={{ 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                step={1}
+                value={roaddifficulty}
+                onChange={(e) => setRoaddifficulty(e)}
+                />
 
             </label>
             <label className="accessibilitylabel">
             Accessibility
-            <select className="accessibilityselect" value={accessibility} onChange={(e) => setAccessibility(e.target.value)}>
-                    <option value="" disabled>Select level of Accessibility</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-
-                    </select>
+            <SliderComponent
+                 className="accessibilityselect"
+                min={1}
+                max={5}
+                marks={{ 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                step={1}
+                value={accessibility}
+                onChange={(e) => setAccessibility(e)}
+                />
 
             </label>
             <label className="imagelabel">
@@ -248,7 +254,7 @@ const CreateCampsite = () => {
             type="text"
             value={image}
             placeholder="Image Url"
-            
+
             onChange={(e) => {
                 setImage(e.target.value)
             }}

@@ -33,14 +33,14 @@
     width: 100%;
 }
 
+.loginbutton:hover {
+    background-color: var(--background);
+}
 .demouserbutton {
     background: none;
     border: none;
     color: var(--primary);
 
-}
-.loginbutton:hover {
-    background-color: var(--background);
 }
 .demouserbutton:hover {
     background-color: var(--background);
