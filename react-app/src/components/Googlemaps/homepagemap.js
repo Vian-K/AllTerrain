@@ -3,6 +3,7 @@ import { useState, useRef} from 'react';
 import { NavLink, useHistory } from 'react-router-dom'
 import { StandaloneSearchBox, GoogleMap, useLoadScript, MarkerF, InfoWindow } from '@react-google-maps/api'
 import "./googlemaps.css"
+
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCampsiteThunk } from '../../store/Campsites';
 import ReactStars from 'react-rating-stars-component';
@@ -49,7 +50,7 @@ const center = {
   };
 const containerStyle = {
     width: 'calc(100% - 300px)',
-    height: '900px',
+    height: '100vh',
     left: '300px'
 
   };
@@ -88,11 +89,11 @@ return (
               onClick={() => setSelectedId(id)}
             >
               {selectedId === id && (
-                <InfoWindow position={posObj}>
+                <InfoWindow className="infowindow" position={posObj}>
                   <div>
                     <NavLink to={`/campsites/${id}`}>
                       <img className="infowindowimage" src={img} />
-                      <h4>{name}</h4>
+                      <h4 className="campgroundname">{name}</h4>
                     </NavLink>
                     <div>
                     {avgReview && avgReview() > 0 ? (
@@ -105,7 +106,7 @@ return (
                       edit={false}
                       activeColor="#ffd700"
                           />
-                  <p>{avgReview()}</p>
+
                      </>
                   ) : (
                   <p>No reviews</p>

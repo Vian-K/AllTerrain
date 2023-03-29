@@ -11,7 +11,7 @@ const SingleCampsite = () => {
     const history = useHistory()
     const campsiteDetail = useSelector(state => state.CampsiteReducer.singleCampsite.campsite)
     const user = useSelector(state => state.session.user)
-    const [info, showInfo] = useState(false)
+    const [info, showInfo] = useState(true)
     const [reviews, showReviews] = useState(false)
     // console.log("DETAIL", campsiteDetail)
     useEffect(() => {

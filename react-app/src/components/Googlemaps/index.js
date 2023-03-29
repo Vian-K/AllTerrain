@@ -65,11 +65,11 @@ return (
           <MarkerF
             position={selected}>
 
-            <InfoWindow position={selected}>
+            <InfoWindow className="infowindow" position={selected}>
               <div>
 
-                <p>Latitude: {selected.lat.toFixed(4)}</p>
-                <p>Longitude: {selected.lng.toFixed(4)}</p>
+                <p className="lat-lng">Latitude: {selected.lat.toFixed(4)}</p>
+                <p className="lat-lng">Longitude: {selected.lng.toFixed(4)}</p>
                 <button onClick={(e) => setCoordinates(e)}>Select</button>
               </div>
             </InfoWindow>

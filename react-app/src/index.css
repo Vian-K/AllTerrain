@@ -1,1 +1,53 @@
 /* TODO Add site wide styles */
+html {
+    font-family: 'Nunito Sans', sans-serif;
+    /* font-family: 'Oxygen', sans-serif; */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+html::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+
+button {
+    cursor: pointer;
+}
+
+:root {
+    --background: #fff;
+    --primary: #000;
+}
+
+[data-theme='light'] {
+    --background: #fff;
+    --primary: #000;
+}
+
+[data-theme='dark'] {
+    --background: #282c34;
+    --primary: #fff;
+}
+
+
+body {
+    background-color: var(--background);
+    color: var(--primary);
+}
+
+i {
+    background-color: var(--background);
+    color: var(--primary);
+}

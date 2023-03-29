@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
 
+
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -29,48 +30,48 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+      <h1 className="signupformheader">Sign Up</h1>
+      <form className="signupform" onSubmit={handleSubmit}>
+        <ul className="errors">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
+        <label className="signupformlabel">
           Email
-          <input
+          <input className="signupforminput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="signupformlabel">
           Username
-          <input
+          <input className="signupforminput"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="signupformlabel">
           Password
-          <input
+          <input className="signupforminput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="signupforminput">
           Confirm Password
-          <input
+          <input className="signupforminput"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className='signupbutton' type="submit">Sign Up</button>
       </form>
     </>
   );

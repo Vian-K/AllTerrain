@@ -10,16 +10,24 @@ import SingleCampsite from "./components/Campsite/SingleCampsite"
 import MapContainer from "./components/Googlemaps";
 import CreateCampsite from "./components/Campsite/AddCampsite";
 import EditCampsite from "./components/Campsite/EditCampsite"
+import { useTheme, ThemeProvider } from 'react-hook-theme';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const { theme, setTheme } = useTheme();
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
+    <ThemeProvider
+    options={{
+        theme: 'dark',
+        save: true,
+    }}
+    >
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -50,6 +58,7 @@ function App() {
 
         </Switch>
       )}
+      </ThemeProvider>
     </>
   );
 }

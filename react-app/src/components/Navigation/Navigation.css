@@ -1,6 +1,4 @@
-.profile-dropdown {
-  position: absolute;
-}
+
 
 .hidden {
   display: none;
@@ -9,7 +7,7 @@
 .navbar {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   width: 260px;
   height: 100%;
@@ -18,7 +16,6 @@
   top: 0;
   bottom: 0;
   padding: 20px;
-  background-color: #fff;
   border-right: 1px solid #ddd;
 }
 
@@ -26,3 +23,22 @@
   display: flex;
   flex-direction: row;
 }
+
+.aboutcontainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+
+}
+
+.homebutton {
+  font-size: 28px;
+}
+
+.profilebutton {
+  background: none;
+  border: none
+}
+
+
