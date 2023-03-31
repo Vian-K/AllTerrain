@@ -9,12 +9,6 @@
     width: 50%;
 }
 
-.errormessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 400px;
-}
 .name-form {
     border-radius: 20px;
     height: 25px;
@@ -127,9 +121,9 @@
     background: none;
     border: none;
     font-size: 18px;
-  }
+}
 
-  .openmapbutton::after {
+.openmapbutton::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -140,25 +134,25 @@
     background-color: var(--primary);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-  }
+}
 
-  .openmapbutton:hover::after {
+.openmapbutton:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
 
   .submit-form {
-    display: inline-block;
-    margin: 5px;
+      display: inline-block;
+      margin: 5px;
     position: relative;
     color: var(--primary);
     background: none;
     border: none;
     font-size: 18px;
     width: 10%;
-  }
+}
 
-  .submit-form::after {
+.submit-form::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -169,9 +163,16 @@
     background-color: var(--primary);
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-  }
+}
 
-  .submit-form:hover::after {
+.submit-form:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+}
+.errormessageadd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    /* margin-top: 400px; */
+}

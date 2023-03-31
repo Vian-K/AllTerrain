@@ -105,7 +105,8 @@ const CreateCampsite = () => {
 
     if(!user) {
         return <div>
-            <h3 className="errormessage">You must be logged in to create a campsite.</h3>
+            <h1 className="errormessageadd">Welcome, camper !</h1>
+            <h1 className="errormessageadd">Please log in or sign up to add a Campsite.</h1>
             </div>
     }
     return(
