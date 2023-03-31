@@ -108,3 +108,50 @@
     color: rgb(250, 35, 35);
 }
 
+.loginbutton {
+    background: none;
+    border: none;
+    color: var(--primary);
+    width: 100%;
+}
+
+.demouserbutton {
+    background: none;
+    border: none;
+    color: var(--primary);
+
+}
+.loginbutton:hover {
+    background-color: var(--background);
+}
+.demouserbutton:hover {
+    background-color: var(--background);
+
+}
+
+.cleanlinessselect {
+    width: 300px;
+    margin: 20px;
+}
+.roaddifficultyselect {
+    width: 300px;
+    margin: 20px;
+}
+.accessibilityselect {
+    width: 300px;
+    margin: 20px;
+}
+
+.cleanlinesslabel {
+    margin: 5px;
+}
+.roaddifficultylabel {
+    margin: 5px;
+}
+.accessibilitylabel {
+    margin: 5px;
+}
+
+/* .openmapbutton {
+
+} */
