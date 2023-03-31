@@ -33,8 +33,33 @@
 }
 
 .homebutton {
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+  --background: #fff;
+  background: none;
+  border: none;
   font-size: 28px;
 }
+
+.homebutton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.homebutton:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 
 .profilebutton {
   background: none;
@@ -42,3 +67,115 @@
 }
 
 
+.profilebuttons {
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+  color: var(--primary);
+  /* color: white; */
+  background: none;
+  border: none;
+  font-size: 18px;
+}
+
+.profilebuttons::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.profilebuttons:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+.campsitesbutton {
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+  --background: #fff;
+  background: none;
+  border: none;
+  font-size: 18px;
+}
+
+.campsitesbutton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.campsitesbutton:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.logoutbutton {
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+  color: #ffffff;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+.logoutbutton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.logoutbutton:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.myplacesbutton {
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+  color: #ffffff;
+  background: none;
+  border: none;
+  font-size: 18px;
+}
+
+.myplacesbutton::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.myplacesbutton:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

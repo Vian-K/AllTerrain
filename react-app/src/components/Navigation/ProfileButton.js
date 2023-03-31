@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import "../Navigation/Navigation.css"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button className="logoutbutton" onClick={handleLogout}>Log Out</button>
             </li>
           </>
         ) : (

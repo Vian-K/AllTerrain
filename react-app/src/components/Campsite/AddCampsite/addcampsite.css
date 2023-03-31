@@ -102,40 +102,76 @@
     margin: 0;
 }
 
-.submit-form {
-    background: none;
-    border: none;
-    color: var(--primary);
-    width: 100%;
-}
-
-.submit-form:hover {
-    background-color: var(--background);
-    
-}
 
 
 .errors {
     color: rgb(250, 35, 35);
 }
 
-.loginbutton {
+#addmapcontainer {
+    position: absolute;
+    z-index: 1;
+    right:100px;
+    top: 0px;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 173vh;
+}
+
+.openmapbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
     background: none;
     border: none;
-    color: var(--primary);
+    font-size: 18px;
+  }
+
+  .openmapbutton::after {
+    content: '';
+    position: absolute;
     width: 100%;
-}
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
 
-.demouserbutton {
+  .openmapbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .submit-form {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
     background: none;
     border: none;
-    color: var(--primary);
+    font-size: 18px;
+    width: 10%;
+  }
 
-}
-.loginbutton:hover {
-    background-color: var(--background);
-}
-.demouserbutton:hover {
-    background-color: var(--background);
+  .submit-form::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
 
-}
+  .submit-form:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }

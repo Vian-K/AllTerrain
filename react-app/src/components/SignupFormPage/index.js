@@ -14,11 +14,16 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    if (!emailRegex.test(email)) {
+      return setErrors(['Please enter a valid email address'])
+    }
+    else if (password === confirmPassword) {
         const data = await dispatch(signUp(username, email, password));
         if (data) {
           setErrors(data)
@@ -38,7 +43,7 @@ function SignupFormPage() {
         <label className="signupformlabel">
           Email
           <input className="signupforminput"
-            type="text"
+            type="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

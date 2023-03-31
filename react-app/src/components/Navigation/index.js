@@ -26,21 +26,21 @@ function Navigation({ isLoaded }){
 			  </div>
 			)}
 			</div>
-			<NavLink exact to="/">Campsites</NavLink>
+			<NavLink className="campsitesbutton"exact to="/">Campsites</NavLink>
 
 
 			<div >
-			  <NavLink exact to="/campsites">Add a Campsite</NavLink>
+			  <NavLink className="campsitesbutton" exact to="/campsites">Add a Campsite</NavLink>
 			</div>
 			<div >
 
-			  <button className='Myplacesbutton'>My places</button>
+			  {/* <button className="myplacesbutton">My places</button> */}
 			</div>
 			<Toggle />
 			<div className="aboutcontainer">
 				<h4>About the Developer</h4>
-				<a href='https://github.com/Vian-K'>Github</a>
-				<a href='https://www.linkedin.com/in/viankhachatourian/'>Linkedin</a>
+				<NavLink className="campsitesbutton" target="_blank" rel='' to={{pathname: 'https://github.com/Vian-K'}}>Github</NavLink>
+				<NavLink className="campsitesbutton" target="_blank" rel='' to={{pathname: 'https://www.linkedin.com/in/viankhachatourian/'}}>Linkedin</NavLink>
 			</div>
 		  </nav>
 		</div>

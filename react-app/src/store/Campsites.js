@@ -48,7 +48,7 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
     let campsiteData;
     if(response.ok){
         campsiteData = await response.json()
-        console.log("campsiteDATA", campsiteData)
+
         const res = await fetch(`/api/campsiteimages/`, {
             method: 'POST',
             headers: {
@@ -63,7 +63,7 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
 
         if(res.ok) {
             const resData = await res.json()
-            console.log("RESDATA", resData)
+            
             campsiteData.campsiteImages = [resData]
             // console.log("PRODUCTDATA", ProductData)
             // console.log("CAMP", campsiteData.campsiteImages)

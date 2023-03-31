@@ -32,8 +32,8 @@ const SingleCampsite = () => {
     return(
         <div className="maindetailscontainer">
             <div className="inforeviewbuttons">
-                <button onClick={infoVisible}>Info</button>
-                <button onClick={reviewsVisible}>Reviews</button>
+                <button className="infobutton"onClick={infoVisible}>Info</button>
+                <button className="reviewbutton" onClick={reviewsVisible}>Reviews</button>
             </div>
 
             {info && (
@@ -72,8 +72,8 @@ const SingleCampsite = () => {
                         <div>
                             {user && campsiteDetail.owner === user?.id ? (
                                 <div>
-                                    <button onClick={() => history.push(`/campsites/edit/${id.id}`)}>Edit Campsite</button>
-                                    <button onClick={() => dispatch(deleteCampsiteThunk(id.id)).then(() => history.push('/'))}>Delete Campsite</button>
+                                    <button className="editbutton" onClick={() => history.push(`/campsites/edit/${id.id}`)}>Edit your Campsite</button>
+                                    <button className="deletebutton" onClick={() => dispatch(deleteCampsiteThunk(id.id)).then(() => history.push('/'))}>Delete this Campsite</button>
                                 </div>
                             ) : null}
                         </div>

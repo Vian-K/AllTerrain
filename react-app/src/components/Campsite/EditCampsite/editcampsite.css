@@ -102,40 +102,8 @@
     margin: 0;
 }
 
-.submit-form {
-    background: none;
-    border: none;
-    color: var(--primary);
-    width: 100%;
-}
-
-.submit-form:hover {
-    background-color: var(--background);
-
-}
 
 
 .errors {
     color: rgb(250, 35, 35);
-}
-
-.loginbutton {
-    background: none;
-    border: none;
-    color: var(--primary);
-    width: 100%;
-}
-
-.demouserbutton {
-    background: none;
-    border: none;
-    color: var(--primary);
-
-}
-.loginbutton:hover {
-    background-color: var(--background);
-}
-.demouserbutton:hover {
-    background-color: var(--background);
-
 }

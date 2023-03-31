@@ -13,6 +13,122 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
     width: 90%;
+
 }
+
+.infobutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 28px;
+    width: 10%;
+  }
+
+  .infobutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .infobutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .reviewbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 28px;
+    width: 10%;
+  }
+
+  .reviewbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .reviewbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+.editbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 18px;
+    width: 80%;
+  }
+
+  .editbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .editbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+.deletebutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 18px;
+    width: 80%;
+  }
+
+  .deletebutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .deletebutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }

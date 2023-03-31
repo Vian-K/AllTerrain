@@ -17,6 +17,7 @@ const EditCampsite = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const campsite = useSelector(state => state.CampsiteReducer.singleCampsite)
+    
     useEffect(() => {
         const data = async () => {
             const campsite = await dispatch(singleCampsiteThunk(id.id))

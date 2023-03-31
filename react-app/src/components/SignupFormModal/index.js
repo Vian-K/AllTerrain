@@ -12,9 +12,13 @@ function SignupFormModal() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!emailRegex.test(email)) {
+			setErrors(['Please enter a valid email address'])
+		  }
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password));
 			if (data) {
@@ -41,7 +45,7 @@ function SignupFormModal() {
 				<label className="signupformlabel">
 					Email
 					<input className="signupforminput"
-						type="text"
+						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required

@@ -148,14 +148,16 @@ const CreateCampsite = () => {
             <div>
             <button className="openmapbutton" onClick={openMap}>Find on Map</button>
             {showMap && (
+            <div id="addmapcontainer">
                 <MapContainer
-                    setLocation={(newLocation) => {
-                    setLocation(newLocation);
-                    setShowMap(false);
+                setLocation={(newLocation) => {
+                setLocation(newLocation);
+                setShowMap(false);
                     }}
-                    />)}
+                    />
             </div>
-
+                )}
+                </div>
             </label>
             <label className="detailslabel">
             Details
