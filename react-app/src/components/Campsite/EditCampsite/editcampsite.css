@@ -139,3 +139,30 @@
     background-color: var(--background);
 
 }
+
+.cleanlinessselect {
+    width: 300px;
+    margin: 20px;
+}
+.roaddifficultyselect {
+    width: 300px;
+    margin: 20px;
+}
+.accessibilityselect {
+    width: 300px;
+    margin: 20px;
+}
+
+.cleanlinesslabel {
+    margin: 5px;
+}
+.roaddifficultylabel {
+    margin: 5px;
+}
+.accessibilitylabel {
+    margin: 5px;
+}
+
+.openmapbutton {
+    
+}
