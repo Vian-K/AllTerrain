@@ -129,7 +129,7 @@
   display: inline-block;
   margin: 5px;
   position: relative;
-  color: #ffffff;
+  color: var(--primary);
   background: none;
   border: none;
   font-size: 14px;
