@@ -1,0 +1,64 @@
+
+
+/* .deleteheader {
+    color: white;
+    font-size: 24px;
+} */
+
+.nobutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: white;
+
+    background: none;
+    border: none;
+    font-size: 18px;
+  }
+
+  .nobutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .nobutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .yesbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: white;
+    /* left: 575px; */
+    background: none;
+    border: none;
+    font-size: 18px;
+  }
+
+  .yesbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .yesbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }

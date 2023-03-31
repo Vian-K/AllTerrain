@@ -55,7 +55,7 @@ const CreateCampsite = () => {
             return
         }
         if (details.length === 0 || details.length > 255) {
-            setErrors(errors => [...errors, 'Please enter a valid description (less than 255 characters)'])
+            setErrors(errors => [...errors, 'Please enter a valid details (less than 255 characters)'])
             return
         }
         if (cost <= 0 || !cost || cost > 50000) {
@@ -165,7 +165,7 @@ const CreateCampsite = () => {
             type="text"
             value={details}
             placeholder="Details"
-            maxLength={50}
+            maxLength={255}
             onChange={(e) => {
                 setDetails(e.target.value)
             }}

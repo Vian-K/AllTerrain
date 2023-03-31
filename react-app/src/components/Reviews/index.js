@@ -30,6 +30,9 @@ export const Reviews = () => {
         setErrors([])
         if (!review || review.length < 3) {
             setErrors(["Please enter a valid review with at least 3 characters"])
+        // if(review.length > 255) {
+        //   setErrors(["Maximum length 255 characters"])
+        // }
             setTimeout(() => {
                 setErrors([])
             }, 2000)
@@ -88,13 +91,13 @@ export const Reviews = () => {
         setRating(newRating)
     }
     return (
-        <div>
-            <h1>Reviews</h1>
+        <div className='reviews'>
+            
                 {reviews.map(({id ,userid, review, rating, created_at}) => {
                     const date =  new Date(created_at).toLocaleDateString('en-US')
                     return <div>
                         <p>{date}</p>
-                        <p>{review}</p>
+                        <p className="review">{review}</p>
 
                         <div>
                         {avgReview && avgReview() > 0 ? (
@@ -128,7 +131,7 @@ export const Reviews = () => {
             {user && reviews.userid !== userId ? (
               userHasReview ? null : (
                 showForm ? (
-                  <div>
+                  <div className='reviews'>
                     <form className="reviewsform" onSubmit={handleSubmit} noValidate>
                       <ul className="ul">
                         {errors.map((error, idx) => (
@@ -179,6 +182,7 @@ export const Reviews = () => {
            <p>{reviewCheck()}</p>
         </div>
         </div>
+
       );
     }
 export default Reviews;

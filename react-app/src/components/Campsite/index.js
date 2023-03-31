@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { NavLink, Switch, Route } from 'react-router-dom'
 import { createCampsiteThunk,loadCampsiteThunk } from '../../store/Campsites'
 import MapContainer from '../Googlemaps'
-
+import "../../index.css"
 import HomePageMap from '../Googlemaps/homepagemap'
 import SingleCampsite from './SingleCampsite'
 
@@ -20,7 +20,7 @@ export const Campsites = () => {
         dispatch(loadCampsiteThunk())
     }, [dispatch])
 
-
+   
     return (
         <div>
             <Switch>
@@ -35,5 +35,7 @@ export const Campsites = () => {
             </div>
     )
 }
+
+
 
 export default Campsites;

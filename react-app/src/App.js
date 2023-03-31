@@ -52,9 +52,9 @@ function App() {
           <Route path="*">
             <NotFound />
           </Route>
-          <Route path="/campsites/*">
+          {/* <Route path="/campsites/*">
             <NotFound />
-          </Route>
+          </Route> */}
 
         </Switch>
       )}
@@ -63,12 +63,15 @@ function App() {
   );
 }
 
-function NotFound() {
+export function NotFound() {
 
   return (
-    <div>
+    <div className="pagenotfound">
       <h1>404 Not Found</h1>
+      <div>
       <p>Sorry, the page you are looking for doesn't exist.</p>
+
+      </div>
     </div>
   );
 }

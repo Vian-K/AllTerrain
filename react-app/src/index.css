@@ -51,3 +51,10 @@ i {
     background-color: var(--background);
     color: var(--primary);
 }
+
+.pagenotfound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
