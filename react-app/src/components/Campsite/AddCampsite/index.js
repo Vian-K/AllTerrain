@@ -63,7 +63,7 @@ const CreateCampsite = () => {
             return
         }
         if (cost <= 0 || !cost || cost > 50000) {
-            setErrors(errors => [...errors, 'Please enter a cost (must be a positive number between 0 and 50000'])
+            setErrors(errors => [...errors, 'Please enter a cost (must be a positive number between 0 and 50000)'])
             return
         }
         if (!Number(cost)) {
