@@ -24,36 +24,32 @@ export const Reviews = () => {
 
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        setErrors([])
-        if (!review || review.length < 3) {
-            setErrors(["Please enter a valid review with at least 3 characters"])
-        // if(review.length > 255) {
-        //   setErrors(["Maximum length 255 characters"])
-        // }
+      e.preventDefault()
+      setErrors([])
+      if (!review || review.length < 3) {
+        setErrors(["Please enter a valid review with at least 3 characters"])
+      } else if (review.length > 254) {
+        setErrors(["Maximum length 255 characters"])
+      } else {
+        dispatch(addReviewThunk(ID, { userId, review, rating }))
+          .then(() => {
+            dispatch(readReviewThunk(id.id))
+            setShowForm(false)
+            setReviews("")
+          })
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+              setErrors(data.errors);
+            } else if (data && data.message) {
+              setErrors([data.message]);
+            }
+            setShowForm(true);
             setTimeout(() => {
-                setErrors([])
-            }, 2000)
-            return
-        }
-        return dispatch(addReviewThunk(ID, { userId, review, rating }))
-            .then(() => {
-                dispatch(readReviewThunk(id.id))
-                setShowForm(false)
-                setReviews("")
-            })
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                  setErrors(data.errors);
-                } else if (data && data.message) {
-                  setErrors([data.message]);
-                }
-                setShowForm(true);
-                setTimeout(() => {
-                  setErrors([]);
-                }, 2000);
-              });
+              setErrors([]);
+            }, 2000);
+          });
+      }
     }
     const userHasReview = reviews.some(({userid}) => userid === userId)
     const loggedIn = () => {
@@ -131,7 +127,7 @@ export const Reviews = () => {
                 showForm ? (
                   <div className='reviews'>
                     <form className="reviewsform" onSubmit={handleSubmit} noValidate>
-                      <ul className="ul">
+                      <ul className="reviewerrors">
                         {errors.map((error, idx) => (
                           <li key={idx}>{error}</li>
                         ))}

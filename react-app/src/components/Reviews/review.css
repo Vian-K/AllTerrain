@@ -26,6 +26,13 @@
     overflow-y: scroll;
     word-break: break-all;
 }
+.reviewerrors {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 12px;
+  color: red;
+}
 
 .deletereviewbutton {
     display: inline-block;
