@@ -55,3 +55,101 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+.cancelbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 12px;
+    width: 10%;
+  }
+
+  .cancelbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .cancelbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+.add-review-btn {
+    display: inline-block;
+    margin: 25px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 18px;
+    width: 20%;
+  }
+
+  .add-review-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .add-review-btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+.submitbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 12px;
+    width: 10%;
+  }
+
+  .submitbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .submitbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .reviewtextbox {
+    border: none;
+    border-radius: 10px;
+    width: 350px;
+    height: 150px;
+    max-width: 350px;
+    max-height: 150px;
+    min-width: 350px;
+    min-height: 150px;
+  }

@@ -102,7 +102,7 @@ return (
                       count={5}
                       value={avgReview()}
                       size={20}
-                      isHalf={true}
+                      
                       edit={false}
                       activeColor="#ffd700"
                           />

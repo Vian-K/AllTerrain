@@ -40,12 +40,7 @@
     flex-direction: column;
     margin: 0;
 }
-.details-form {
-    border-radius: 10px;
-    height: 25px;
-    width: 275px;
-    margin-bottom: 20px;
-}
+
 .detailslabel {
     display: flex;
     align-items: center;

@@ -96,7 +96,7 @@ const CreateCampsite = () => {
               dispatch(createCampsiteThunk({campsiteData, imgData}))
               .then(() => history.push('/'))
               .catch(async (res) => {
-                
+
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
               });
@@ -155,7 +155,7 @@ const CreateCampsite = () => {
     return(
         <div className="createmaincontainer">
             <form className="campsiteform" onSubmit={handleSubmit} noValidate>
-            <h1>New Campground</h1>
+            <h1>Create your Campground</h1>
             <ul className="error-message">
                 {errors.map((error, idx) => (
                 <li key={idx} className="error-text">
@@ -190,7 +190,7 @@ const CreateCampsite = () => {
             }}
             ></input> Or
             <div>
-            <button className="openmapbutton" onClick={openMap}>Find on Map</button>
+            <button className="openmapbutton" onClick={openMap}>Drop a pin on the Map</button>
             {showMap && (
             <div id="addmapcontainer">
                 <MapContainer
@@ -221,7 +221,7 @@ const CreateCampsite = () => {
             <input className="cost-form"
             type="text"
             value={cost}
-            placeholder="Cost"
+            placeholder="Cost per Night"
             maxLength={50}
             onChange={(e) => {
                 setCost(e.target.value)
