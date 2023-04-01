@@ -19,7 +19,7 @@ const SingleCampsite = () => {
     const { closeModal } = useModal();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef()
-    // console.log("DETAIL", campsiteDetail)
+    
     useEffect(() => {
         dispatch(singleCampsiteThunk(id.id))
     }, [dispatch])
@@ -121,7 +121,7 @@ const SingleCampsite = () => {
             {reviews && (
 
                     <Reviews />
-                
+
             )}
         </div>
     )

@@ -13,8 +13,6 @@ export const Reviews = () => {
     const [rating, setRating] = useState(5)
     const reviewsObj = useSelector(state => state.reviewsReducer.CampsiteReviews)
     const reviews = Object.values(reviewsObj)
-    // console.log("REVIEWSOBJ", reviews)
-    // console.log("REVIEWSOBJ", reviewsObj)
     const user = useSelector(state => state.session.user)
     const userId = user?.id
     const [errors, setErrors] = useState([])
@@ -92,7 +90,7 @@ export const Reviews = () => {
     }
     return (
         <div className='reviews'>
-            
+
                 {reviews.map(({id ,userid, review, rating, created_at}) => {
                     const date =  new Date(created_at).toLocaleDateString('en-US')
                     return <div>
@@ -127,7 +125,7 @@ export const Reviews = () => {
                 })
                 }
                  <div>
-            {/* {console.log("REVIEWSOBJ", reviewsObj)} */}
+            
             {user && reviews.userid !== userId ? (
               userHasReview ? null : (
                 showForm ? (

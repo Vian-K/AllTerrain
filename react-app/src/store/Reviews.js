@@ -24,8 +24,7 @@ const deleteReview = (reviewId) => ({
 //THUNKS
 export const addReviewThunk = (id, review) => async (dispatch) => {
 
-    // console.log("REVIEW", review)
-    // console.log("ID", id)
+
     const response = await fetch("/api/reviews/" , {
         method: 'POST',
         headers: {
@@ -38,7 +37,7 @@ export const addReviewThunk = (id, review) => async (dispatch) => {
             rating: review.rating
         })
     })
-    // console.log("RESPONSE", response)
+
     if (response.ok) {
         const review = await response.json();
         dispatch(addReview(review))
@@ -104,10 +103,10 @@ export const reviewsReducer = (state = initialState, action) => {
         case ADD_REVIEW:
             newState = {...state}
             let newStateCopy = {...newState.CampsiteReviews}
-            console.log("ACTIONPAYLOAD", action.payload)
+
             newStateCopy[action.payload.id] = action.payload
             newState.CampsiteReviews = newStateCopy
-            console.log("NEWSTATECOPY", newStateCopy)
+
             return newState
 
         case EDIT_REVIEWS:
@@ -117,8 +116,7 @@ export const reviewsReducer = (state = initialState, action) => {
         case DELETE_REVIEW:
             newState = {...state}
             let reviewCopy = {...newState.CampsiteReviews}
-            console.log("reviewCopy", reviewCopy)
-            console.log("ACTIONPAYLOAD", action.payload)
+            
 
             delete reviewCopy[action.payload.id]
             newState.CampsiteReviews = reviewCopy

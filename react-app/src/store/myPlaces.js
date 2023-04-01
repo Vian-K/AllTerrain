@@ -73,7 +73,7 @@ export const placesReducer = (state = {} , action) => {
                 allProductsCopy[places.id] = places
             })
             newState.allProducts = allProductsCopy
-            // console.log("allproductscopy", allProductsCopy)
+
             return newState
         case NEW_PLACES:
             newState = {...state}

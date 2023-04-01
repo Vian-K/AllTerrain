@@ -50,7 +50,7 @@ const onRightClick = (e) => {
     setSelected(null);
 
   }
-  console.log("SELECTED", selected)
+  
 
 
 if (!isLoaded) {

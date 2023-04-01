@@ -37,7 +37,7 @@ const addImages = (campsite) => ({
 // Thunks
 
 export const createCampsiteThunk = (campsite) => async (dispatch) => {
-    console.log("CAMPSITE", campsite)
+
     const response = await fetch(`/api/campsites/`, {
         method: 'POST',
         headers: {
@@ -63,12 +63,11 @@ export const createCampsiteThunk = (campsite) => async (dispatch) => {
 
         if(res.ok) {
             const resData = await res.json()
-            
+
             campsiteData.campsiteImages = [resData]
-            // console.log("PRODUCTDATA", ProductData)
-            // console.log("CAMP", campsiteData.campsiteImages)
+
             dispatch(createCampsite(campsiteData))
-            // dispatch(addImages(campsite.imgData))
+
 
             return
         }
@@ -93,9 +92,7 @@ export const singleCampsiteThunk = (id) => async (dispatch) => {
 
 
 export const editCampsiteThunk = (campsiteID, editedCampsite, imgData) => async (dispatch) => {
-    console.log("EDITEDCAMPSITE", editedCampsite)
-    console.log("EDITEDIMGDATA", imgData)
-    console.log("IDDDD", campsiteID)
+
     const response = await fetch(`/api/campsites/${campsiteID}`, {
         method:'PUT',
         headers: {
@@ -139,7 +136,7 @@ export const deleteCampsiteThunk = (id) => async (dispatch) => {
     if (response.ok) {
         // const data = await response.json()
         dispatch(deleteCampsite(id))
-        console.log("RESPONSE", response)
+
         return response
     }
 }
@@ -165,7 +162,7 @@ export const CampsiteReducer = (state = initialState, action) => {
             return newState
         case LOAD_ONE_CAMPSITE:
             newState = {...state}
-            // console.log("Action", action)
+
             newState.singleCampsite = action.payload
             return newState
         case EDIT_CAMPSITE:
@@ -185,7 +182,7 @@ export const CampsiteReducer = (state = initialState, action) => {
             return newState
         case ADD_IMAGE:
             newState = {...state}
-            console.log("NEWSTATE", newState)
+            
             const newCampsiteImage = {...state.singleCampsite}
             newCampsiteImage[action.payload.singleCampsite] = action.payload.singleCampsite
             newState.campsite = newCampsiteImage

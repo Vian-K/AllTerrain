@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { NavLink, Switch, Route, useHistory } from 'react-router-dom'
 import { createCampsiteThunk } from '../../../store/Campsites'
+import OpenModalButton from "../../OpenModalButton";
+import LoginFormModal from "../../LoginFormModal";
+import SignupFormModal from "../../SignupFormModal";
 import MapContainer from '../../Googlemaps'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -13,7 +16,8 @@ const CreateCampsite = () => {
     const history = useHistory()
     const user = useSelector(state => state.session.user)
     const SliderComponent = Slider;
-
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
     const [name, setName ] = useState('')
     const [details, setDetails ] = useState('')
     const [location, setLocation ] = useState('')
@@ -92,23 +96,62 @@ const CreateCampsite = () => {
               dispatch(createCampsiteThunk({campsiteData, imgData}))
               .then(() => history.push('/'))
               .catch(async (res) => {
-                console.log("RES", res)
+                
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
               });
             }
 
-        const openMap = () => {
+    const openMap = () => {
             setShowMap(!showMap);
         }
+    const openMenu = () => {
+            if (showMenu) return;
+            setShowMenu(true);
+          };
 
+    useEffect(() => {
+            if (!showMenu) return;
 
-    if(!user) {
-        return <div>
-            <h1 className="errormessageadd">Welcome, camper !</h1>
-            <h1 className="errormessageadd">Please log in or sign up to add a Campsite.</h1>
-            </div>
-    }
+            const closeMenu = (e) => {
+              if (!ulRef.current.contains(e.target)) {
+                setShowMenu(false);
+              }
+            };
+
+            document.addEventListener("click", closeMenu);
+
+            return () => document.removeEventListener("click", closeMenu);
+          }, [showMenu]);
+
+    const closeMenu = () => setShowMenu(false);
+    const LoginModal = () => {
+        return (
+          <OpenModalButton
+            buttonText="Log In"
+            onItemClick={closeMenu}
+            modalComponent={<LoginFormModal />}
+          />
+        );
+      };
+
+      const SignupModal = () => {
+        return (
+          <OpenModalButton
+            buttonText="Sign Up"
+            onItemClick={closeMenu}
+            modalComponent={<SignupFormModal />}
+          />
+        );
+      };
+          if (!user) {
+            return (
+              <div>
+                <h1 className="errormessageadd">Welcome, camper!</h1>
+                <p className="errormessageadd">Please <LoginModal /> or <SignupModal /> to create a campsite.</p>
+              </div>
+            );
+          }
     return(
         <div className="createmaincontainer">
             <form className="campsiteform" onSubmit={handleSubmit} noValidate>

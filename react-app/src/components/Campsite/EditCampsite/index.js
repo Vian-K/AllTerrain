@@ -21,7 +21,7 @@ const EditCampsite = () => {
     useEffect(() => {
         const data = async () => {
             const campsite = await dispatch(singleCampsiteThunk(id.id))
-            // console.log("CAMPSITESSSSSSSSS", campsite)
+
             setName(campsite.campsite.name)
             setDetails(campsite.campsite.details)
             setLocation(campsite.campsite.location)
@@ -49,7 +49,7 @@ const EditCampsite = () => {
     const [image, setImage ] = useState('')
     const [errors, setErrors ] = useState([])
     const [showMap, setShowMap] = useState(false)
-    // console.log("CAMPSITE", campsite)
+
 
     if(!campsite) {
         return null
@@ -120,12 +120,7 @@ const EditCampsite = () => {
 
             dispatch(editCampsiteThunk(id.id, campsiteData, imgData))
             .then(() => history.push(`/campsites/${id.id}`))
-            // .catch(async (res) => {
-            //     console.log("RES", res)
-            //     const data = await res.json();
-            //     console.log("DATA", data)
-            //     if (data && data.errors) setErrors(data.errors)
-            // });
+          
         }
     const openMap = () => {
         setShowMap(!showMap);
