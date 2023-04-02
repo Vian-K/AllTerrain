@@ -1,3 +1,23 @@
+# About AllTerrain:
+![image](https://user-images.githubusercontent.com/110942717/229334151-76e4201d-d312-47bd-9d75-1a33786e5691.png)
+
+
+- AllTerrain is a travel based site inspired by FreeRoam.app that allows users to share campsites that they have visited anywhere around the world. This platform provides users with the ability to easily sign up, log in, create, edit or delete campsites. Users can also engage with the map feature that has existing campsites created by other users, and can leave reviews on campsites they visit as well.
+
+To check out the live version of my website, simply follow this link: https://allterrain.onrender.com/ .
+
+
+## Technologies used:
+   - Javascript
+   - Python
+   - React
+   - Redux
+   - Flask
+   - NodeJS
+   - CSS
+   - Database: PostgreSQL
+   - Hosting: Render
+
 # Flask React Project
 
 This is the starter for the Flask React project.
@@ -146,3 +166,55 @@ your site just below the name of the Web Service at the top of the page.
 
 [Render.com]: https://render.com/
 [Dashboard]: https://dashboard.render.com/# AllTerrain
+
+# Features Directions:
+
+### Checkout the images below before examples of how to use the implemented features from this project! All features follow basic (full or partial) CRUD format.
+
+## Demo User/Log in
+You can test some features without logging in, but to test all of them please log in or utilize our demo user.
+![image](https://user-images.githubusercontent.com/110942717/229334276-619824bf-a57e-41da-818e-afea5a1b655a.png)
+
+## Sign up:
+![image](https://user-images.githubusercontent.com/110942717/229334291-e8a6c215-c684-43a9-a658-f87685587744.png)
+
+## All available campsites:
+![image](https://user-images.githubusercontent.com/110942717/229334308-6d52e342-5633-4770-bba4-ae4090c96f25.png)
+
+## Create a campsite
+![image](https://user-images.githubusercontent.com/110942717/229334352-a40d88d3-5c7d-4ed7-b4d2-92d9185c2f02.png)
+
+### With the ability to choose your location with a map feature
+![image](https://user-images.githubusercontent.com/110942717/229334373-e314945b-d82c-4b2c-8b94-d85189034193.png)
+
+## View details of a campsite
+### Edit and delete campsites that you've created and own.
+![image](https://user-images.githubusercontent.com/110942717/229334414-95bb2af3-6c09-4387-b79a-d5f1401ff40d.png)
+
+## Add a review of a campsite
+![image](https://user-images.githubusercontent.com/110942717/229334440-5b165533-4ba4-4497-9638-6767a64fa2ac.png)
+
+## Bonus Features
+
+### Users have the ability to view the page in light mode or dark mode using a switch built into the navigation bar
+![image](https://user-images.githubusercontent.com/110942717/229334505-4c29c54e-a10f-4f6e-8082-d92dfca3cb86.png)
+
+
+### Users will be shown a 404 page if visiting a link a campsite or link that does not exist
+![image](https://user-images.githubusercontent.com/110942717/229334551-b4d779db-e486-44a9-8852-aa0a6d32f267.png)
+
+
+# Features coming soon...
+
+## My places
+
+### Users will be able to add campsites that they've visited and enjoyed to a list
+#### Users will be able to delete campsites that they have visited from this list.
+
+
+## Checklist
+
+### Users will be able to create and delete checklists for items that they are taking with them on a trip.
+#### Users will be able to create multiple lists and add items to individual checklists based on their trip.
+
+
