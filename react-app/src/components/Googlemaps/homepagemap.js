@@ -19,19 +19,26 @@ const campsitesArr = Object.values(campsites)
 // console.log( "ENV", process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY )
 let img;
 const avgReview = () => {
-  let allRatingsArray = []
-  campsitesArr.forEach(({reviews}) => {
+  let allRatingsArray = [];
+  let count = 0;
+  let hasReviews = false;
+  campsitesArr.forEach(({ id, reviews }) => {
+    if (id === selectedId) {
 
-    reviews.forEach(review => {
-      if (review.length === 0) return null
-      allRatingsArray.push(review.rating)
-    })
-  })
-  let initialValue = 0
+      reviews.forEach((review) => {
+        if (review.length === 0) return <p>No Reviews</p>
+        allRatingsArray.push(review.rating);
+        count++;
+        hasReviews = true;
+      });
+    }
+  });
+  if (!hasReviews) return <p>No Reviews</p>;
+  if (count === 0) return <p>No Reviews</p>;
+  let initialValue = 0;
   let avgRating = allRatingsArray.reduce((a, b) => a + b, initialValue);
-  return (avgRating/allRatingsArray.length).toFixed(2)
-}
-
+  return (avgRating / allRatingsArray.length).toFixed(2);
+};
 
 useEffect(() => {
     dispatch(loadCampsiteThunk())
@@ -96,13 +103,13 @@ return (
                       <h4 className="campgroundname">{name}</h4>
                     </NavLink>
                     <div>
-                    {avgReview && avgReview() > 0 ? (
+                    {avgReview(selectedId) > 0 ? (
                      <>
                     <ReactStars
                       count={5}
-                      value={avgReview()}
+                      value={parseFloat(avgReview())}
                       size={20}
-                      
+
                       edit={false}
                       activeColor="#ffd700"
                           />
