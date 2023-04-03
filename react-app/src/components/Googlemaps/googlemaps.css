@@ -91,11 +91,11 @@
     height: 75px;
   }
 
-  .mapcontainer {
+  /* .mapcontainer {
     position: relative;
     width: 100%;
     height: 100%;
-   }
+   } */
 
   #my-map {
     position: absolute;

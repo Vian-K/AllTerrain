@@ -120,9 +120,10 @@ const EditCampsite = () => {
 
             dispatch(editCampsiteThunk(id.id, campsiteData, imgData))
             .then(() => history.push(`/campsites/${id.id}`))
-          
+
         }
-    const openMap = () => {
+    const openMap = (e) => {
+        e.preventDefault()
         setShowMap(!showMap);
     }
 
@@ -165,17 +166,20 @@ const EditCampsite = () => {
             }}
             ></input> Or
             <div>
-            <button className="openmapbutton" onClick={openMap}>Find on Map</button>
+            <button className="openmapbutton" onClick={openMap}>Drop a pin on the map</button>
             {showMap && (
-                <MapContainer
-                    setLocation={(newLocation) => {
+                <div id="addmapcontainer">
+                <MapContainer id="addmapcontainer"
+                setLocation={(newLocation) => {
                     setLocation(newLocation);
                     setShowMap(false);
-                    }}
-                    />)}
+                }}
+                />
+                </div>
+                )}
             </div>
+                </label>
 
-            </label>
             <label className="detailslabel">
             Details
             <input className="details-form"

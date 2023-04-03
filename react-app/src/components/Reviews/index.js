@@ -149,6 +149,7 @@ export const Reviews = () => {
                         required
                       ></textarea>
                      <ReactStars
+                        key={rating}
                         count={5}
                         value={rating}
                         onChange={newRating}
