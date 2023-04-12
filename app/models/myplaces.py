@@ -11,7 +11,7 @@ class MyPlace(db.Model):
     campsiteid = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('campsite.id')), nullable=False)
     userid = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
-    user = db.relationship("Users", back_populates='myplaces')
+    users = db.relationship("User", back_populates='myplaces')
 
     def to_dict(self):
         return {

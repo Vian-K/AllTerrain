@@ -58,7 +58,7 @@ def createReview():
 @login_required
 def deleteReview(id):
     review = Review.query.get(id)
-    print("review", review)
+    
     if not review:
         return ("Review not found"), 404
     if review.userid != current_user.id:

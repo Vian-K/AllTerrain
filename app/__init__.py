@@ -4,12 +4,13 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from .models import db, User, Campsite, CampsiteImage, Review
+from .models import db, User, Campsite, CampsiteImage, Review, MyPlace
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.campsite_routes import campsite_routes
 from .api.campsiteimages_route import campsiteimages_routes
 from .api.review_routes import review_routes
+from .api.myplaces_routes import myplaces_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -34,6 +35,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(campsite_routes, url_prefix='/api/campsites')
 app.register_blueprint(campsiteimages_routes, url_prefix='/api/campsiteimages')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
+app.register_blueprint(myplaces_routes, url_prefix='/api/myplaces')
 db.init_app(app)
 Migrate(app, db)
 
