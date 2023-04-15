@@ -24,9 +24,9 @@ const deletePlaces = (id) => ({
 
 // Thunks
 
-export const createPlacesThunk = (places) => async (dispatch) => {
+export const createPlacesThunk = (places, id) => async (dispatch) => {
 
-    const response = await fetch(`/api/`, {
+    const response = await fetch(`/api/myplaces/${id}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -41,7 +41,7 @@ export const createPlacesThunk = (places) => async (dispatch) => {
 
 
 export const loadPlacesThunk = () => async (dispatch) => {
-    const response = await fetch(`/api/`)
+    const response = await fetch(`/api/myplaces/`)
     const data = await response.json()
     dispatch(loadPlaces(data))
     return response
@@ -51,7 +51,7 @@ export const loadPlacesThunk = () => async (dispatch) => {
 
 export const deletePlacesThunk = (id) => async (dispatch) => {
 
-    const response = await fetch(`/api/${id}`, {
+    const response = await fetch(`/api/myplaces/${id}`, {
         method: 'DELETE'
     })
     if (response.ok) {
@@ -67,12 +67,13 @@ export const placesReducer = (state = {} , action) => {
     let newState;
     switch(action.type){
         case LOAD_PLACES:
+            
             newState = {...state}
-            let allProductsCopy = {}
-            action.payload.products.forEach(places => {
-                allProductsCopy[places.id] = places
+            let allPlacesCopy = {}
+            action.payload.myplaces.forEach(places => {
+                allPlacesCopy[places.id] = places
             })
-            newState.allProducts = allProductsCopy
+            newState.allPlaces = allPlacesCopy
 
             return newState
         case NEW_PLACES:

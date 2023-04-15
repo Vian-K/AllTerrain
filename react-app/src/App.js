@@ -10,6 +10,7 @@ import SingleCampsite from "./components/Campsite/SingleCampsite"
 import MapContainer from "./components/Googlemaps";
 import CreateCampsite from "./components/Campsite/AddCampsite";
 import EditCampsite from "./components/Campsite/EditCampsite"
+import MyPlaces from "./components/MyPlaces";
 import { useTheme, ThemeProvider } from 'react-hook-theme';
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route exact path='/campsites/edit/:id'>
             <EditCampsite />
+          </Route>
+          <Route exact path='/myplaces'>
+            <MyPlaces />
           </Route>
           <Route path="*">
             <NotFound />

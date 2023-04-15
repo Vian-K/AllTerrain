@@ -34,7 +34,7 @@ function Navigation({ isLoaded }){
 			</div>
 			<div >
 
-			  {/* <button className="myplacesbutton">My places</button> */}
+			  <button className="myplacesbutton" exact to="/myplaces" >My places</button>
 			</div>
 			<Toggle />
 			<div className="aboutcontainer">

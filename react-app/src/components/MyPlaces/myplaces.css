@@ -1,0 +1,14 @@
+.myplacescontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.myplacesdata {
+    display: flex;
+    justify-content: center;
+
+
+}
