@@ -13,6 +13,7 @@ class CampsiteImage(db.Model):
     campsiteid = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod('campsite.id')), nullable=False)
 
     campsite = db.relationship("Campsite", back_populates='campsiteimages')
+    
 
     def to_dict(self):
         return {

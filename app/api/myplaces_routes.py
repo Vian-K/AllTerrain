@@ -12,14 +12,26 @@ def myPlaces():
         return {"Error": "Must be logged in"}
 
     myplaces = MyPlace.query.filter_by(userid = current_user.id).all()
+
     allPlaces = []
-    if not myplaces:
-        return {"message": "You have no favorites"}
+
 
     for places in myplaces:
         pd = places.to_dict()
+        print("PDD=======", pd)
+        campsites = Campsite.query.filter_by(id = places.campsiteid).all()
+        for campsite in campsites:
+            cdImages = {'campsiteImages': [campsiteimages.to_dict() for campsiteimages in campsite.campsiteimages]}
+            cdReviews = {'reviews': [reviews.to_dict() for reviews in campsite.reviews]}
+        cdCampsite = {'campsite': [campsite.to_dict() for campsite in [places.campsite]]}
+        pd.update(cdCampsite)
+        pd.update(cdImages)
+        pd.update(cdReviews)
         allPlaces.append(pd)
-    return {'myplaces' : allPlaces}
+    if not myplaces:
+        return {"myplaces": ["You have no favorites"]}
+    else:
+        return {'myplaces' : allPlaces}
 
 @myplaces_routes.route('/<int:id>', methods=['POST'])
 @login_required

@@ -43,7 +43,12 @@ export const createPlacesThunk = (places, id) => async (dispatch) => {
 export const loadPlacesThunk = () => async (dispatch) => {
     const response = await fetch(`/api/myplaces/`)
     const data = await response.json()
-    dispatch(loadPlaces(data))
+    if(data || response) {
+        dispatch(loadPlaces(data))
+    } else {
+        return []
+    }
+
     return response
 }
 
@@ -67,10 +72,11 @@ export const placesReducer = (state = {} , action) => {
     let newState;
     switch(action.type){
         case LOAD_PLACES:
-            
+
             newState = {...state}
             let allPlacesCopy = {}
-            action.payload.myplaces.forEach(places => {
+            console.log('ACTIONPAYLOAD', action.payload)
+            action.payload?.myplaces.forEach(places => {
                 allPlacesCopy[places.id] = places
             })
             newState.allPlaces = allPlacesCopy

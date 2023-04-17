@@ -22,6 +22,7 @@ class Campsite(db.Model):
     users = db.relationship("User", back_populates="campsite")
     campsiteimages = db.relationship("CampsiteImage", back_populates="campsite", cascade='all, delete')
     reviews = db.relationship("Review", back_populates='campsite', cascade='all, delete')
+    myplaces = db.relationship("MyPlace", back_populates='campsite', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -35,6 +36,7 @@ class Campsite(db.Model):
             'roaddifficulty': self.roaddifficulty,
             'cleanliness': self.cleanliness,
             'celldata': self.celldata,
-            'accessibility': self.accessibility
+            'accessibility': self.accessibility,
+            
 
         }

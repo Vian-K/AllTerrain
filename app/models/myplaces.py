@@ -12,10 +12,15 @@ class MyPlace(db.Model):
     userid = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     users = db.relationship("User", back_populates='myplaces')
+    campsite = db.relationship("Campsite", back_populates='myplaces')
+
 
     def to_dict(self):
         return {
             'id': self.id,
             'campsiteid': self.campsiteid,
-            'userid': self.userid
+            'userid': self.userid,
+            'campsite': self.campsite,
+            
+
         }
