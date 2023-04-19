@@ -3,18 +3,38 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 .detailsimages {
     width: 400px;
     height: 200px;
+    margin-top: 50px;
+    border-radius: 10px;
+    position: relative;
+    left: 100px;
+
 }
 .inforeviewbuttons {
+    position: relative;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 75%;
+    padding: 20px;
+    margin-right: 130px;
 
+
+
+}
+.inforeviewbuttons:after {
+  content: "";
+  background: rgba(255, 255, 255, 0.87);
+  position: absolute;
+  bottom: 0;
+  left: 145px;
+  height: 1%;
+  width: 120%;
 }
 
 .infobutton {
@@ -149,4 +169,28 @@
  }
  .details::-webkit-scrollbar {
   display: none;
+}
+
+
+.addtoplacesbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  color: var(--primary);
+  height: 25px;
+
+}
+.addtoplacesbutton:hover {
+  background-color: #0b1322;
+
+}
+
+.addtoplacesbutton:disabled {
+  background-color: #63636375;
+  border-color:var(--primary);
+  color: #fff;
+
 }

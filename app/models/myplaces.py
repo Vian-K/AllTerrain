@@ -20,7 +20,7 @@ class MyPlace(db.Model):
             'id': self.id,
             'campsiteid': self.campsiteid,
             'userid': self.userid,
-            'campsite': self.campsite,
             
+
 
         }

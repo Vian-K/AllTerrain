@@ -1,5 +1,5 @@
 .myplacescontainer {
-    margin-top: 25px;
+    margin-top: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,6 +7,19 @@
 
 }
 
+.myplacestitle{
+    margin-top: 5px;
+}
+.myplacestitle:after {
+    content: "";
+    background: rgba(255, 255, 255, 0.87);
+    position: absolute;
+    /* bottom: 0; */
+    top: 90px;
+    left: 300px;
+    height: .1%;
+    width: 90%;
+  }
 .myplacesdata {
     display: flex;
     flex-direction: column;
@@ -41,6 +54,7 @@
     flex-direction: column;
     border-bottom: 1px solid grey;
     padding: 5px;
+    margin-top: 15px;
 }
 
 .imagerow {
@@ -49,3 +63,36 @@
     width: 100%;
     justify-content: space-between;
 }
+.deleteplacesbuttoncontainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deleteplacesbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 18px;
+    width: 6%;
+  }
+
+  .deleteplacesbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .deleteplacesbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }

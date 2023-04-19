@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCampsiteThunk, editCampsiteThunk, singleCampsiteThunk } from "../../../store/Campsites";
+import { createPlacesThunk, loadPlacesThunk } from "../../../store/myPlaces";
 import OpenModalButton from "../../OpenModalButton";
 import DeleteButtonModal from "../DeleteCampsiteModal"
 import { useModal } from "../../../context/Modal";
@@ -13,15 +14,19 @@ const SingleCampsite = () => {
     const id = useParams()
     const history = useHistory()
     const campsiteDetail = useSelector(state => state.CampsiteReducer.singleCampsite.campsite)
+    const myplaces = useSelector(state => state.placesReducer.allPlaces || [])
+    const myplacesObj = Object.values(myplaces)
     const user = useSelector(state => state.session.user)
     const [info, showInfo] = useState(true)
     const [reviews, showReviews] = useState(false)
     const { closeModal } = useModal();
     const [showMenu, setShowMenu] = useState(false);
+    const [isAdded, setIsAdded] = useState(false);
     const ulRef = useRef()
-    
+
     useEffect(() => {
         dispatch(singleCampsiteThunk(id.id))
+        dispatch(loadPlacesThunk())
     }, [dispatch])
 
     useEffect(() => {
@@ -38,8 +43,15 @@ const SingleCampsite = () => {
         return () => document.removeEventListener("click", closeMenu);
       }, [showMenu]);
 
-    if(!campsiteDetail) {
+      useEffect(() => {
+        const match = myplacesObj.some(({campsiteid}) => campsiteid == id.id)
 
+        if(match) setIsAdded(true)
+
+    }, [myplacesObj, id.id])
+
+    
+    if(!campsiteDetail) {
        return <div className="pagenotfound">
        <h1>404 Not Found</h1>
        <div>
@@ -59,6 +71,11 @@ const SingleCampsite = () => {
         showInfo(true)
         showReviews(false)
 
+    }
+
+    const handleCreate = () => {
+        dispatch(createPlacesThunk(id.id))
+        setIsAdded(true)
     }
     return(
         <div className="maindetailscontainer">
@@ -114,6 +131,8 @@ const SingleCampsite = () => {
                         ) : null}
 
                         </div>
+                        <button className="addtoplacesbutton" onClick={handleCreate} disabled={isAdded}>
+                        {isAdded ? "Added to My Places" : "Add to My places"}</button>
                     </div>
                 </div>
             )}

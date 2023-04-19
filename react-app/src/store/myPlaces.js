@@ -24,19 +24,17 @@ const deletePlaces = (id) => ({
 
 // Thunks
 
-export const createPlacesThunk = (places, id) => async (dispatch) => {
+export const createPlacesThunk = (id) => async (dispatch) => {
 
     const response = await fetch(`/api/myplaces/${id}`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(places)
+        method: 'POST'
     })
-    if(response.ok) {
-        dispatch(createPlaces)
-    }
+    const data = await response.json()
 
+    if(response.ok) {
+        dispatch(createPlaces(data))
+    }
+    return response
     }
 
 
@@ -53,17 +51,14 @@ export const loadPlacesThunk = () => async (dispatch) => {
 }
 
 
-
 export const deletePlacesThunk = (id) => async (dispatch) => {
-
     const response = await fetch(`/api/myplaces/${id}`, {
         method: 'DELETE'
     })
     if (response.ok) {
-
         dispatch(deletePlaces(id))
-        return response
     }
+    return response
 }
 
 
@@ -74,8 +69,8 @@ export const placesReducer = (state = {} , action) => {
         case LOAD_PLACES:
 
             newState = {...state}
+            console.log()
             let allPlacesCopy = {}
-            console.log('ACTIONPAYLOAD', action.payload)
             action.payload?.myplaces.forEach(places => {
                 allPlacesCopy[places.id] = places
             })
@@ -84,18 +79,23 @@ export const placesReducer = (state = {} , action) => {
             return newState
         case NEW_PLACES:
             newState = {...state}
-            let newStateCopy = {...newState.allProducts}
+            let newStateCopy = {...newState.allPlaces}
             newStateCopy[action.payload.id] = action.payload
-            newState.allProducts = newStateCopy
+            newState.allPlaces = newStateCopy
             return newState
-
 
         case DELETE_PLACES:
             newState={...state}
-            let productsCopy = {...newState.allProducts}
-            delete productsCopy[action.id]
-            newState.allProducts = productsCopy
-            newState.singleProduct = {}
+            
+            let placesCopy = {...newState.allPlaces}
+            for (let id in placesCopy) {
+                if(placesCopy[id].campsiteid === action.payload) {
+                    delete placesCopy[id]
+                    break
+                }
+            }
+
+            newState.allPlaces = placesCopy
 
             return newState
 

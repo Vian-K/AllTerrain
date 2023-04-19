@@ -1,9 +1,12 @@
-
+.reviewcontainer {
+  border-bottom: 1px solid grey;
+  margin-bottom: 15px;
+}
 .reviews {
     display: flex !important;
     justify-content: center;
     flex-direction: column;
-    margin: 10px;
+    margin: 15px;
     width: 60%;
     overflow-y: scroll;
     word-break: break-all;
@@ -36,13 +39,14 @@
 
 .deletereviewbutton {
     display: inline-block;
-    margin: 5px;
+    margin: 10px;
     position: relative;
     color: var(--primary);
     background: none;
     border: none;
     font-size: 12px;
-    width: 10%;
+    width: 5%;
+    left: 1050px;
   }
 
   .deletereviewbutton::after {

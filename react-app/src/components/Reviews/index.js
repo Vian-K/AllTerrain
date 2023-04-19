@@ -89,7 +89,7 @@ export const Reviews = () => {
 
                 {reviews.map(({id ,userid, review, rating, created_at}) => {
                     const date =  new Date(created_at).toLocaleDateString('en-US')
-                    return <div>
+                    return <div className='reviewcontainer'>
                         <p>{date}</p>
                         <p className="review">{review}</p>
 
