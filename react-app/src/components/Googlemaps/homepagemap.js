@@ -70,10 +70,8 @@ if (!isLoaded) {
 return (
   <>
     <div className='mapcontainer'>
-      {/* <div>
-        <button onClick={() => {}}>Campsites</button>
-      </div> */}
-      <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={center} zoom={7}
+
+      <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={center} zoom={6}
       options={{disableDoubleClickZoom: true}} ref={mapRef} >
 
 {campsites &&
@@ -93,8 +91,11 @@ return (
             <MarkerF
               key={id}
               position={posObj}
-              onClick={() => setSelectedId(id)}
-            >
+              onClick={() => {
+                setSelectedId(id);
+
+              }}
+              >
               {selectedId === id && (
                 <InfoWindow className="infowindow" position={posObj}>
                   <div>

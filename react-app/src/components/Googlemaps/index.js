@@ -50,7 +50,7 @@ const onRightClick = (e) => {
     setSelected(null);
 
   }
-  
+
 
 
 if (!isLoaded) {
@@ -59,7 +59,7 @@ if (!isLoaded) {
 return (
   <div className="mapcontainer">
     <div  onContextMenu={onRightClick}>
-      <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={selected || center} zoom={10} options={{disableDoubleClickZoom: true}} ref={mapRef} onClick={(e) => mapClick(e)}>
+      <GoogleMap id="my-map" mapContainerStyle={containerStyle} center={selected || center} zoom={6} options={{disableDoubleClickZoom: true}} ref={mapRef} onClick={(e) => mapClick(e)}>
 
       {selected && (
           <MarkerF

@@ -47,6 +47,63 @@ def seed_campsiteimages():
     demo15 = CampsiteImage(
         campsiteid= 15, image="https://assets.simpleviewinc.com/simpleview/image/upload/crm/virginia/po-campsite_3B41E13E-B6B5-433F-AD81BAEF6B13BEB9_b20dd75b-a8eb-46ef-9b18b6b4cc4d78a5.jpg", preview=True
     )
+    demo16 = CampsiteImage(
+        campsiteid= 16, image="https://www.gannett-cdn.com/-mm-/c97542d6921c1d0b1a402f255abcb39a1b54b791/c=0-397-3261-2239/local/-/media/2017/01/18/Phoenix/Phoenix/636203411897211550-IMG-1352.JPG?width=660&height=373&fit=crop&format=pjpg&auto=webp", preview=True
+    )
+    demo17 = CampsiteImage(
+        campsiteid= 17, image="https://www.stanleyhotel.com/uploads/9/8/6/9/98696462/img-0601_1_orig.jpg", preview=True
+    )
+    demo18 = CampsiteImage(
+        campsiteid= 18, image="https://wisconsinlife.org/wp-content/uploads/2018/06/wisc-river-1.jpg", preview=True
+    )
+    demo19 = CampsiteImage(
+        campsiteid= 19, image="https://mymodernmet.com/wp/wp-content/uploads/2017/11/you-did-not-sleep-there-extreme-camping-photography-thumbnail.jpg", preview=True
+    )
+    demo20 = CampsiteImage(
+        campsiteid= 20, image="https://www.outdoor-insight.co.uk/wp-content/uploads/2022/02/The_Dyrt-scaled.jpg", preview=True
+    )
+    demo21 = CampsiteImage(
+        campsiteid= 21, image="https://st2.depositphotos.com/1891797/5672/i/450/depositphotos_56720681-stock-photo-hiker-campfire-and-tent.jpg", preview=True
+    )
+    demo22 = CampsiteImage(
+        campsiteid= 22, image="https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2011/10/camping_in_cave/10069911-2-eng-GB/Camping_in_cave.jpg", preview=True
+    )
+    demo23 = CampsiteImage(
+        campsiteid= 23, image="https://hipcamp-res.cloudinary.com/image/upload/c_limit,f_auto,h_1200,q_60,w_1920/v1487888285/campground-photos/yug1atrq4our7lqcqwzg.jpg", preview=True
+    )
+    demo24 = CampsiteImage(
+        campsiteid= 24, image="https://cdn.vox-cdn.com/thumbor/FMUIaXcnBaKK9YqdP8qtxUog150=/0x0:4741x3161/1200x800/filters:focal(1992x1202:2750x1960)/cdn.vox-cdn.com/uploads/chorus_image/image/59535149/shutterstock_625918454.0.jpg", preview=True
+    )
+    demo25 = CampsiteImage(
+        campsiteid= 25, image="https://www.campingiceland.com/wp-content/uploads/2018/11/can-camp-anywhere-iceland-skogafoss-campsite-e1543335571850.jpg", preview=True
+    )
+    demo26 = CampsiteImage(
+        campsiteid= 26, image="https://adventures.com/media/9903/camping-waterfall.jpg?anchor=center&mode=crop&width=970&height=645&rnd=132639093150000000&quality=80&format=jpg", preview=True
+    )
+    demo27 = CampsiteImage(
+        campsiteid= 27, image="https://www.austincampground.com/wp-content/uploads/2021/04/Austin-Campground-Penn-Home-Thumbnail-RV-Sites.jpg", preview=True
+    )
+    demo28 = CampsiteImage(
+        campsiteid= 28, image="https://howtostartanllc.com/images/business-ideas/business-idea-images/campground.jpg", preview=True
+    )
+    demo29 = CampsiteImage(
+        campsiteid= 29, image="https://explorethec.com/wp-content/uploads/2022/01/rv-campground2.jpg", preview=True
+    )
+    demo30 = CampsiteImage(
+        campsiteid= 30, image="https://photos.thedyrt.com/photo/684869/media/redden-state-forest-campground_48f1908e-163c-4fb6-8ce3-cdc8890b9d57.jpg", preview=True
+    )
+    demo31 = CampsiteImage(
+        campsiteid= 31, image="https://u7q2x7c9.stackpathcdn.com/photos/26/18/383329_7719_XXL.jpg", preview=True
+    )
+    demo32 = CampsiteImage(
+        campsiteid= 32, image="https://2.bp.blogspot.com/-Mfif8kIL5KM/USlDJdBC4OI/AAAAAAAADtw/P-aB9hqL4Y0/s1600/Winter+Camping-1.JPG", preview=True
+    )
+    demo33 = CampsiteImage(
+        campsiteid= 33, image="https://everythinginacarryon.files.wordpress.com/2021/06/crowded-campground.jpg", preview=True
+    )
+    demo34 = CampsiteImage(
+        campsiteid= 34, image="https://metro.co.uk/wp-content/uploads/2022/08/SEC_119537212-bee4.jpg?quality=90&strip=all&zoom=1&resize=480%2C252", preview=True
+    )
     db.session.add(demo1)
     db.session.add(demo2)
     db.session.add(demo3)
@@ -62,6 +119,26 @@ def seed_campsiteimages():
     db.session.add(demo13)
     db.session.add(demo14)
     db.session.add(demo15)
+    db.session.add(demo16)
+    db.session.add(demo17)
+    db.session.add(demo18)
+    db.session.add(demo19)
+    db.session.add(demo20)
+    db.session.add(demo21)
+    db.session.add(demo22)
+    db.session.add(demo23)
+    db.session.add(demo24)
+    db.session.add(demo25)
+    db.session.add(demo26)
+    db.session.add(demo27)
+    db.session.add(demo28)
+    db.session.add(demo29)
+    db.session.add(demo30)
+    db.session.add(demo31)
+    db.session.add(demo32)
+    db.session.add(demo33)
+    db.session.add(demo34)
+    
     db.session.commit()
 
 def undo_campsiteimages():
