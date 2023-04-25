@@ -11,6 +11,8 @@ from .api.campsite_routes import campsite_routes
 from .api.campsiteimages_route import campsiteimages_routes
 from .api.review_routes import review_routes
 from .api.myplaces_routes import myplaces_routes
+from .api.checklist_routes import checklist_routes
+from .api.checklistitems_routes import checklistitem_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +38,8 @@ app.register_blueprint(campsite_routes, url_prefix='/api/campsites')
 app.register_blueprint(campsiteimages_routes, url_prefix='/api/campsiteimages')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(myplaces_routes, url_prefix='/api/myplaces')
+app.register_blueprint(checklist_routes, url_prefix='/api/checklists')
+app.register_blueprint(checklistitem_routes, url_prefix='/api/checklistitems')
 db.init_app(app)
 Migrate(app, db)
 

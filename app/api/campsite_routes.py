@@ -17,7 +17,7 @@ def allCampsites():
         cdReviews = {'reviews': [reviews.to_dict() for reviews in campsite.reviews]}
         cd.update(cdImages)
         cd.update(cdReviews)
-        # print("-----CD------", cd)
+
         allCampsites.append(cd)
 
     return {'campsites': allCampsites}
@@ -66,7 +66,7 @@ def createCampsite():
 
         return new_campsite.to_dict()
     else:
-        print("-------ERRORS-----", form.errors)
+
         return form.errors
 @campsite_routes.route('/<int:id>', methods=['PUT'])
 @login_required

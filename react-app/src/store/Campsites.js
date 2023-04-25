@@ -30,10 +30,7 @@ const singleCampsite = (campsite) => ({
     payload: campsite
 })
 
-const addImages = (campsite) => ({
-    type: ADD_IMAGE,
-    payload: campsite
-})
+
 // Thunks
 
 export const createCampsiteThunk = (campsite) => async (dispatch) => {
@@ -182,7 +179,7 @@ export const CampsiteReducer = (state = initialState, action) => {
             return newState
         case ADD_IMAGE:
             newState = {...state}
-            
+
             const newCampsiteImage = {...state.singleCampsite}
             newCampsiteImage[action.payload.singleCampsite] = action.payload.singleCampsite
             newState.campsite = newCampsiteImage

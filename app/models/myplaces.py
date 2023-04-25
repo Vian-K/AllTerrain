@@ -19,8 +19,5 @@ class MyPlace(db.Model):
         return {
             'id': self.id,
             'campsiteid': self.campsiteid,
-            'userid': self.userid,
-            
-
-
+            'userid': self.userid
         }
