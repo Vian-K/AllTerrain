@@ -22,8 +22,8 @@ def createChecklistItems():
     if form.validate_on_submit():
         new_item = ChecklistItem(
             checklistid = data['checklistid'],
-            isComplete = data['isComplete'],
-            items = data['items']
+            item = data['item']
+
 
         )
         db.session.add(new_item)
@@ -39,8 +39,8 @@ def updateChecklistitems(id):
     data = request.get_json()
     if checklistitems:
         checklistitems.id = checklistitems.id
-        checklistitems.isComplete = data['isComplete']
-        checklistitems.items = data['items']
+        checklistitems.item = data['item']
+
 
         db.session.commit()
         checklistobj = checklistitems.to_dict()
@@ -48,3 +48,13 @@ def updateChecklistitems(id):
         return checklistobj
     else:
         return {'Error': "Checklist Item not found"}, 404
+
+@checklistitem_routes.route('/<int:id>', methods=['DELETE'])
+def deleteChecklistItems(id):
+    checklistitems = ChecklistItem.query.get(id)
+    if not checklistitems:
+        return ('Not Found'), 404
+    db.session.delete(checklistitems)
+    db.session.commit()
+
+    return {'Item successfully deleted': id}

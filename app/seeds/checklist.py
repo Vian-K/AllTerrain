@@ -3,13 +3,13 @@ from sqlalchemy.sql import text
 
 def seed_checklist():
     demo1 = Checklist(
-        userid = 1, name = "Demo Checklist Name 1"
+        userid = 1, name = "Demo Checklist Name 1", isComplete=True
     )
     demo2 = Checklist(
-        userid = 2, name = "Demo Checklist Name 2"
+        userid = 2, name = "Demo Checklist Name 2", isComplete=True
     )
     demo3 = Checklist(
-        userid = 3, name = "Demo Checklist Name 3"
+        userid = 3, name = "Demo Checklist Name 3", isComplete=True
     )
 
     db.session.add(demo1)

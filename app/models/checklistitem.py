@@ -10,15 +10,14 @@ class ChecklistItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     checklistid = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('checklist.id')), nullable=False)
-    items = db.Column(db.String(3000), nullable=False)
-    isComplete = db.Column(db.String, nullable=False)
+    item = db.Column(db.String(3000), nullable=False)
+
 
     checklist = db.relationship("Checklist", back_populates='checklistitems')
 
     def to_dict(self):
         return {
             'id': self.id,
-            'items': [self.items],
-            'isComplete': self.isComplete
+            'item': self.item,
 
         }

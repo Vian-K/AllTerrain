@@ -10,6 +10,7 @@ class Checklist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String(255), nullable=False)
+    isComplete = db.Column(db.String, nullable=False)
 
     users = db.relationship("User", back_populates='checklist')
     checklistitems = db.relationship("ChecklistItem", back_populates='checklist', cascade='all, delete')
@@ -18,5 +19,6 @@ class Checklist(db.Model):
         return {
             'id': self.id,
             'userid': self.userid,
-            'name': self.name
+            'name': self.name,
+            'isComplete': self.isComplete
         }

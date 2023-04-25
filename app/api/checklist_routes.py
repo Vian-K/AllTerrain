@@ -25,7 +25,8 @@ def createChecklist():
     if form.validate_on_submit():
         new_checklist = Checklist(
             name = data['name'],
-            userid = current_user.id
+            userid = current_user.id,
+            isComplete = data['isComplete']
         )
         db.session.add(new_checklist)
         db.session.commit()

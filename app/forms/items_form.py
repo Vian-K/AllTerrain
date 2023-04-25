@@ -3,6 +3,6 @@ from wtforms.fields import (StringField, BooleanField, SubmitField)
 from wtforms.validators import DataRequired
 
 class ItemsForm(FlaskForm):
-    isComplete = StringField("isComplete", validators=[DataRequired()])
-    items = StringField("Items", validators=[DataRequired()])
+
+    item = StringField("Item", validators=[DataRequired()])
     submit = SubmitField("Submit")
