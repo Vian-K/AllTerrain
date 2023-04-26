@@ -11,6 +11,7 @@ import MapContainer from "./components/Googlemaps";
 import CreateCampsite from "./components/Campsite/AddCampsite";
 import EditCampsite from "./components/Campsite/EditCampsite"
 import MyPlaces from "./components/MyPlaces";
+import Checklist from "./components/Checklist/checklist";
 import { useTheme, ThemeProvider } from 'react-hook-theme';
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route exact path='/myplaces'>
             <MyPlaces />
+          </Route>
+          <Route exact path='/checklists'>
+            <Checklist />
           </Route>
           <Route path="*">
             <NotFound />

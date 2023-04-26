@@ -5,13 +5,15 @@ import CampsiteReducer from './Campsites';
 import reviewsReducer from './Reviews';
 import checklistReducer from './checklist';
 import placesReducer from './myPlaces';
+import itemsReducer from './checklistitems';
 
 const rootReducer = combineReducers({
   session,
   CampsiteReducer,
   reviewsReducer,
   checklistReducer,
-  placesReducer
+  placesReducer,
+  itemsReducer
 });
 
 

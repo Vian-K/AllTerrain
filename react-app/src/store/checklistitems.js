@@ -1,30 +1,26 @@
+const NEW_ITEM = 'ITEM/newItem'
+const LOAD_ITEM = 'ITEM/loadItem'
+const DELETE_ITEM = 'ITEM/deleteItem'
 
-
-const NEW_CHECKLIST = 'checklist/newChecklist'
-const LOAD_CHECKLIST = 'checklist/loadChecklist'
-const DELETE_CHECKLIST = 'checklist/deleteChecklist'
-
-const createChecklist = (checklist) => ({
-    type: NEW_CHECKLIST,
-    payload: checklist
+const createItem = (item) => ({
+    type: NEW_ITEM,
+    payload: item
 })
 
-const loadChecklist = (checklists) => ({
-    type: LOAD_CHECKLIST,
-    payload: checklists
+const loadItem = (items) => ({
+    type: LOAD_ITEM,
+    payload: items
 })
 
 
-const deleteChecklist = (id) => ({
-    type: DELETE_CHECKLIST,
+const deleteItem = (id) => ({
+    type: DELETE_ITEM,
     payload: id
 })
 
+export const createItemThunk = (checklist) => async (dispatch) => {
 
-
-export const createChecklistThunk = (checklist) => async (dispatch) => {
-
-    const response = await fetch(`/api/checklists/`, {
+    const response = await fetch(`/api/checklistitems/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -34,49 +30,44 @@ export const createChecklistThunk = (checklist) => async (dispatch) => {
     const data = await response.json()
 
     if(response.ok) {
-        dispatch(createChecklist(data))
+        dispatch(createItem(data))
     }
 
     }
 
-
-export const loadchecklistThunk = () => async (dispatch) => {
-    const response = await fetch(`/api/checklists/`)
+export const loadItemThunk = () => async (dispatch) => {
+    const response = await fetch(`/api/checklistitems/`)
     const data = await response.json()
-    dispatch(loadChecklist(data))
+    dispatch(loadItem(data))
     return response
 }
 
+export const deleteItemThunk = (id) => async (dispatch) => {
 
-
-export const deletechecklistThunk = (id) => async (dispatch) => {
-
-    const response = await fetch(`/api/checklists/${id}`, {
+    const response = await fetch(`/api/checklistitems/${id}`, {
         method: 'DELETE'
     })
     if (response.ok) {
 
-        dispatch(deleteChecklist(id))
+        dispatch(deleteItem(id))
         return response
     }
 }
 
-
-
-export const checklistReducer = (state = {}, action) => {
+export const itemsReducer = (state = {}, action) => {
     let newState;
     switch(action.type){
-        case LOAD_CHECKLIST:
+        case LOAD_ITEM:
             newState = {...state}
-            // console.log("ACTIONPAYLOAD", action.payload)
+            console.log("ACTIONPAYLOAD", action.payload)
             let checklistsCopy = {}
-            action.payload.checklists.forEach(checklist => {
+            action.payload.checklistitems.forEach(checklist => {
                 checklistsCopy[checklist.id] = checklist
             })
             newState = checklistsCopy
 
             return newState
-        case NEW_CHECKLIST:
+        case NEW_ITEM:
             newState = {...state}
             let newStateCopy = {...newState.allProducts}
             newStateCopy[action.payload.id] = action.payload
@@ -84,7 +75,7 @@ export const checklistReducer = (state = {}, action) => {
             return newState
 
 
-        case DELETE_CHECKLIST:
+        case DELETE_ITEM:
             newState={...state}
             let productsCopy = {...newState.allProducts}
             delete productsCopy[action.id]
@@ -98,4 +89,4 @@ export const checklistReducer = (state = {}, action) => {
     }
 }
 
-export default checklistReducer
+export default itemsReducer
