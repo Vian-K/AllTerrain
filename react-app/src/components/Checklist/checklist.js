@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
-import { NavLink, Switch, Route } from 'react-router-dom'
 import { loadchecklistThunk, createChecklistThunk, deletechecklistThunk } from '../../store/checklist'
 import { deleteItemThunk } from '../../store/checklistitems'
 import ChecklistItem from './checklistitems'
@@ -8,13 +7,13 @@ import Checkbox from 'rc-checkbox';
 import "./checklist.css"
 
 function Checklist() {
-
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const checklists = Object.values(useSelector(state => state.checklistReducer))
     const [data, setData] = useState(false)
     const [name, setName] = useState('')
     const [checkedItems, setCheckedItems] = useState([])
+    const [selectedChecklist, setSelectedChecklist] = useState(false);
     const [errors, setErrors] = useState([]);
 
 
@@ -39,7 +38,6 @@ function Checklist() {
         }
       };
 
-
       function checkboxToggle(id, isChecked) {
         if (isChecked) {
           setCheckedItems([...checkedItems, id]);
@@ -55,70 +53,77 @@ function Checklist() {
         <div className="checklistscontainer">
           <h1>Checklists</h1>
           <div className="checklistdata">
-
+            <h3>Please select your checklist</h3>
             {checklists.map(({ id, name, userid }) => {
-              if(userid === user.id)
-              return (
-                <div>
-                  <button className='checklistbutton'onClick={() => setData(id)}>{name}</button>
-
-                </div>
-              );
+              if (userid === user.id) {
+                return (
+                  <div key={id}>
+                    <button className={selectedChecklist === id ? 'checklistbutton checked' : 'checklistbutton'} onClick={() => {
+                      setData(id);
+                      setSelectedChecklist(id);
+                    }}>{name}</button>
+                  </div>
+                );
+              }
             })}
-
             <div>
               <form>
-                <input className='addchecklistform'
+                <input
+                  className='addchecklistform'
                   type='text'
                   placeholder='Create a checklist'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-            <button onClick={handleSubmit} className='checklistsubmitbutton' type='submit'>Create</button>
-            {errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
+                <button onClick={handleSubmit} className='checklistsubmitbutton' type='submit'>Create</button>
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
               </form>
-
             </div>
           </div>
-
-          <div className="itemdata">
-
-            {data &&
-              checklists
-                .find((checklist) => checklist.id === data)
-                ?.checklistitems.map(({ id, checklistid, item }) => {
-
-                  if(!item || item.length === 0) {
-                    return <div className="itemcontainer">
-                      <h3>You have no items in this checklist</h3>
-                    </div>
-                  } else
+          {selectedChecklist &&
+            <div className="itemdata">
+              {data && checklists.find((checklist) => checklist.id === data)?.checklistitems.map(({ id, checklistid, item }) => {
+                if (!item || item.length === 0) {
                   return (
                     <div className="itemcontainer">
-
-                      <div className="item" key={id}>
-
-                          <label>
-                          <Checkbox
-                            checked={checkedItems.includes(id)}
-                            type="checkbox"
-                            onChange={(e) => checkboxToggle(id, e.target.checked)}
-                                    />
-                            &nbsp; {item}
-                          </label>
-                          &nbsp;&nbsp;
-                      </div>
-                      <button onClick={() => dispatch(deleteItemThunk(id)).then(() => dispatch(loadchecklistThunk()))}>Delete</button>
-
+                      <h3>You have no items in this checklist</h3>
                     </div>
                   );
-                })}
-                <ChecklistItem data={data}/>
-          </div>
-                <button onClick={() => dispatch(deletechecklistThunk(data)).then(() => dispatch(loadchecklistThunk()))}>Delete this Checklist</button>
+                } else {
+                  return (
+                    <div className="itemcontainer" key={id}>
+                      <div className="item">
+                        <input
+                          className='checklistbox'
+                          type="checkbox"
+                          id={id}
+                          checked={checkedItems.includes(id)}
+                          onChange={(e) => checkboxToggle(id, e.target.checked)}
+                        />
+                        <label className='checklistlabel'htmlFor={id}>{item}</label>
+                      </div>
+                      <i
+                        id="icon"
+                        className="fa-solid fa-trash-can fa-2xs"
+                        onClick={() => dispatch(deleteItemThunk(id)).then(() => dispatch(loadchecklistThunk()))}
+                      ></i>
+                    </div>
+                  );
+                }
+              })}
+              <ChecklistItem data={data} />
+            </div>
+
+          }
+          {selectedChecklist &&
+              <div className='deletechecklistcontainer'>
+              <button className='deletechecklistbutton' onClick={() => dispatch(deletechecklistThunk(data)).then(() => dispatch(loadchecklistThunk()))}>Delete this Checklist</button>
+            </div>
+              }
+
         </div>
       );
-    }
+        }
 export default Checklist;

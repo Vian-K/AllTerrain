@@ -25,12 +25,12 @@ button {
     cursor: pointer;
 }
 :root {
-    --background: #fff;
+    --background: rgb(233, 233, 233);
     --primary: #000;
 }
 
 [data-theme='light'] {
-    --background: #fff;
+    --background: rgb(233, 233, 233);
     --primary: #000;
 }
 

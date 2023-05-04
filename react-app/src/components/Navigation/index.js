@@ -34,12 +34,12 @@ function Navigation({ isLoaded }){
 			</div>
 			{sessionUser &&
 			<div >
-			  <NavLink className="myplacesbutton" exact to="/myplaces" >My places</NavLink>
+			  <NavLink className="campsitesbutton" exact to="/myplaces" >My places</NavLink>
 			</div>
 			}
 			{sessionUser &&
 			<div>
-				<NavLink className='myplacesbutton' exact to='/checklists'>My Checklists</NavLink>
+				<NavLink className='campsitesbutton' exact to='/checklists'>My Checklists</NavLink>
 			</div>
 			}
 			<Toggle />

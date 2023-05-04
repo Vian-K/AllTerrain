@@ -1,5 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
 .checklistscontainer {
     display: flex;
+    width: 100%;
     margin: 15px;
     margin-left: 100px;
     align-items: center;
@@ -9,28 +13,49 @@
 
 .checklistdata {
     display: flex;
-    width: 65%;
+    position: absolute;
+    border: 1px solid var(--primary);
+    left: 350px;
+    top: 100px;
+    width: 300px;
+    height: fit-content;
+    padding: 10px;
     flex-direction: column;
-
-
+    border-radius: 5px;
 }
 
 .itemcontainer {
     display: flex;
+    width: 100%;
+
+}
+.additem {
+    display: flex;
+
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.additemform {
+
+    height: 20px;
+    width: 80%;
+}
+.additeminput {
+    border-radius: 5px;
+    height: 20px;
 
 }
 .item {
     display: flex;
     margin-top: 5px;
     flex-direction: column;
-
 }
 
 .itemdata {
-    display: flex;
-    border: 1px solid white;
+    border-radius: 5px;
+    border: 1px solid var(--primary);
     height: 500px;
-    width: 500px;
+    width: 30%;
     flex-direction: column;
 }
 
@@ -43,3 +68,177 @@
     color: var(--primary);
     margin: 5px;
 }
+
+.checklistbutton.checked {
+    background-color: rgb(155, 155, 155);
+}
+
+.addchecklistform {
+    height: 20px;
+
+    border-radius: 10px;
+}
+
+.checklistlabel {
+    display: flex;
+    margin-left: 20px;
+}
+.checklistbox {
+    display: flex;
+    width: 100%;
+}
+.boxes {
+
+  margin: auto;
+
+  padding: 50px;
+  background: #484848;
+}
+
+#icon {
+    display: flex;
+    margin-top: 16px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+input[type="checkbox"] { display: none; }
+
+input[type="checkbox"] + .checklistlabel  {
+  display: block;
+
+  position: relative;
+  padding-left: 35px;
+  margin: 10px;
+  margin-bottom: 30px;
+  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  color: var(--primary);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+input[type="checkbox"] + .checklistlabel:last-child { margin-bottom: 0; }
+
+input[type="checkbox"] + .checklistlabel:before {
+  content: '';
+  display: block;
+
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + .checklistlabel:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+.additemsubmitbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 14px;
+    width: 15%;
+  }
+
+  .additemsubmitbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .additemsubmitbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .checklistsubmitbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 14px;
+    width: 20%;
+  }
+
+  .checklistsubmitbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .checklistsubmitbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .deletechecklistbutton {
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-size: 14px;
+    width: 15%;
+  }
+
+  .deletechecklistbutton::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+  .deletechecklistbutton:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .deletechecklistcontainer {
+    justify-content: center;
+    display: flex;
+    width: 50%;
+  }
