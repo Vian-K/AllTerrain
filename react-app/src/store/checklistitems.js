@@ -18,22 +18,20 @@ const deleteItem = (id) => ({
     payload: id
 })
 
-export const createItemThunk = (checklist) => async (dispatch) => {
-
+export const createItemThunk = (item, checklistid) => async (dispatch) => {
     const response = await fetch(`/api/checklistitems/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(checklist)
+        body: JSON.stringify({item, checklistid})
     })
     const data = await response.json()
-
     if(response.ok) {
         dispatch(createItem(data))
     }
+}
 
-    }
 
 export const loadItemThunk = () => async (dispatch) => {
     const response = await fetch(`/api/checklistitems/`)
@@ -59,28 +57,26 @@ export const itemsReducer = (state = {}, action) => {
     switch(action.type){
         case LOAD_ITEM:
             newState = {...state}
-            console.log("ACTIONPAYLOAD", action.payload)
             let checklistsCopy = {}
             action.payload.checklistitems.forEach(checklist => {
                 checklistsCopy[checklist.id] = checklist
             })
             newState = checklistsCopy
-
             return newState
         case NEW_ITEM:
             newState = {...state}
-            let newStateCopy = {...newState.allProducts}
-            newStateCopy[action.payload.id] = action.payload
-            newState.allProducts = newStateCopy
+            let newitemcopy = {...newState}
+            newitemcopy[action.payload.id] = action.payload
+            newitemcopy = newState
             return newState
 
 
         case DELETE_ITEM:
             newState={...state}
-            let productsCopy = {...newState.allProducts}
-            delete productsCopy[action.id]
-            newState.allProducts = productsCopy
-            newState.singleProduct = {}
+            let itemsCopy = {...newState.checklistitems}
+            delete itemsCopy[action.payload.id]
+            newState.checklistitems = itemsCopy
+            newState.checklistitems = {}
 
             return newState
 
@@ -89,4 +85,4 @@ export const itemsReducer = (state = {}, action) => {
     }
 }
 
-export default itemsReducer
+export default itemsReducer;

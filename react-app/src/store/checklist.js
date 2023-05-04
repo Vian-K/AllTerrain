@@ -1,5 +1,4 @@
 
-
 const NEW_CHECKLIST = 'checklist/newChecklist'
 const LOAD_CHECKLIST = 'checklist/loadChecklist'
 const DELETE_CHECKLIST = 'checklist/deleteChecklist'
@@ -22,17 +21,17 @@ const deleteChecklist = (id) => ({
 
 
 
-export const createChecklistThunk = (checklist) => async (dispatch) => {
+export const createChecklistThunk = (name, userid) => async (dispatch) => {
 
     const response = await fetch(`/api/checklists/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(checklist)
+        body: JSON.stringify({name, userid})
     })
     const data = await response.json()
-
+    // console.log("DATA", data)
     if(response.ok) {
         dispatch(createChecklist(data))
     }
@@ -68,30 +67,26 @@ export const checklistReducer = (state = {}, action) => {
     switch(action.type){
         case LOAD_CHECKLIST:
             newState = {...state}
-            // console.log("ACTIONPAYLOAD", action.payload)
             let checklistsCopy = {}
             action.payload.checklists.forEach(checklist => {
-                checklistsCopy[checklist.id] = checklist
+                checklistsCopy[checklist.name] = checklist
             })
             newState = checklistsCopy
+            return newState;
 
-            return newState
         case NEW_CHECKLIST:
-            newState = {...state}
-            let newStateCopy = {...newState.allProducts}
-            newStateCopy[action.payload.id] = action.payload
-            newState.allProducts = newStateCopy
-            return newState
-
+            newState = { ...state};
+            let newStateCopy = { ...newState};
+            newStateCopy[action.payload.id] = action.payload;
+            newState = newStateCopy;
+            return newState;
 
         case DELETE_CHECKLIST:
             newState={...state}
-            let productsCopy = {...newState.allProducts}
-            delete productsCopy[action.id]
-            newState.allProducts = productsCopy
-            newState.singleProduct = {}
-
-            return newState
+            let checklistCopy = {...newState.checklists}
+            delete checklistCopy[action.payload.id]
+            newState.checklists = checklistCopy
+            return newState;
 
         default:
             return state;

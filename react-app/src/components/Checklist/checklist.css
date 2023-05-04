@@ -17,15 +17,29 @@
 
 .itemcontainer {
     display: flex;
-    border: 1px solid white;
-    width: 500px;
-    height: 500px;
+
 }
 .item {
     display: flex;
+    margin-top: 5px;
+    flex-direction: column;
+
+}
+
+.itemdata {
+    display: flex;
+    border: 1px solid white;
+    height: 500px;
+    width: 500px;
+    flex-direction: column;
+}
+
+.checklistbutton {
+    display: flex;
+    padding: 10px;
+    background: none;
+    border-radius: 15px;
+    border: 1px solid white;
+    color: var(--primary);
     margin: 5px;
-    /* border: 1px solid red; */
-    flex-direction: row;
-
-
 }

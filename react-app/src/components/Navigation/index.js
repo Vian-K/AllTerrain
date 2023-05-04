@@ -37,6 +37,11 @@ function Navigation({ isLoaded }){
 			  <NavLink className="myplacesbutton" exact to="/myplaces" >My places</NavLink>
 			</div>
 			}
+			{sessionUser &&
+			<div>
+				<NavLink className='myplacesbutton' exact to='/checklists'>My Checklists</NavLink>
+			</div>
+			}
 			<Toggle />
 			<div className="aboutcontainer">
 				<h4>About the Developer</h4>
